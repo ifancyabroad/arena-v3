@@ -1,0 +1,26 @@
+.character-create-container {
+  display: flex;
+
+  .character-create-section {
+    width: calc(100% / 3);
+    padding: 1rem;
+  }
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 2rem;
+}
+
+.class-name {
+  margin-top: 2rem;
+}
+
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}

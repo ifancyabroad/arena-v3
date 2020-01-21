@@ -1,0 +1,47 @@
+<mat-card class="main-card">
+  <mat-card-title>Who are you?</mat-card-title>
+  <mat-card-subtitle>Use the below options to customise your character</mat-card-subtitle>
+
+  <form class="character-create-container" id="character-create" (ngSubmit)="create()">
+    <div class="character-create-section">
+      <h2 class="mat-h2">Profile</h2>
+      <h3 class="mat-h3">Choose a name and face</h3>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Name" name="name" [(ngModel)]="name" maxlength="12" required>
+      </mat-form-field>
+    </div>
+    <div class="character-create-section">
+      <h2 class="mat-h2">Class</h2>
+      <h3 class="mat-h3">Choose your class</h3>
+      <mat-radio-group name="class" [(ngModel)]="selectedClass" (change)="resetStats()">
+        <mat-radio-button *ngFor="let class of classes" [value]="class">{{ class.name }}</mat-radio-button>
+      </mat-radio-group>
+      <ng-container *ngIf="selectedClass">
+        <h3 class="mat-h3 class-name">{{ selectedClass.name }}</h3>
+        <p class="mat-body">{{ selectedClass.description }}</p>  
+      </ng-container>
+    </div>
+    <div class="character-create-section">
+      <div class="stats-header">
+        <h2 class="mat-h2">Stats</h2>
+        <button mat-icon-button color="primary" type="button" (click)="rollStats()">
+          <mat-icon>refresh</mat-icon>
+        </button>  
+      </div>
+      <h3 class="mat-h3">Roll for your base statistics</h3>
+      <table #statTable mat-table [dataSource]="currentStats" class="full-width">
+        <ng-container matColumnDef="name">
+          <td mat-cell *matCellDef="let element"> {{ element.name | titlecase }} </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <td mat-cell *matCellDef="let element" class="text-center"> {{ element.value }} </td>
+        </ng-container>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </form>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit" form="character-create">Enter</button>
+  </mat-card-actions>
+</mat-card>
