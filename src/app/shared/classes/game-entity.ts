@@ -230,7 +230,7 @@ export class GameEntity {
   }
 
   // Get specific stat types
-  getStats = function (type?): Object {
+  getStats(type?: string): Object {
     let stats = {};
     if (!type) {
       stats = this.stats;

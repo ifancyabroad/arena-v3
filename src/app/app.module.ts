@@ -20,6 +20,7 @@ import { GameComponent } from './game/game.component';
 import { ArenaComponent } from './arena/arena.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PlayerComponent } from './arena/player/player.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     CharacterCreateComponent,
     HomeComponent,
     GameComponent,
-    ArenaComponent
+    ArenaComponent,
+    PlayerComponent
   ],
   imports: [
     BrowserModule,

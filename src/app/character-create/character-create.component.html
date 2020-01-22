@@ -1,78 +1,80 @@
-<mat-card class="main-card">
-  <mat-card-title>Who are you?</mat-card-title>
-  <mat-card-subtitle>Use the below options to customise your character</mat-card-subtitle>
-
-  <form class="character-create-container" id="character-create" (ngSubmit)="create()">
-
-    <!-- Name and portrait -->
-    <div class="character-create-section">
-      <h2 class="mat-h2">Profile</h2>
-      <h3 class="mat-h3">Choose a name and face</h3>
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Name" name="name" [(ngModel)]="name" maxlength="12" required>
-      </mat-form-field>
-      <div class="selected-portrait">
-        <button mat-icon-button color="primary" type="button" (click)="changePortrait(-1)">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <div class="portrait-image">
-          <img src="assets/img/portraits/{{ selectedPortrait }}" alt="A character portrait">
+<div class="main-container">
+  <mat-card>
+    <mat-card-title>Who are you?</mat-card-title>
+    <mat-card-subtitle>Use the below options to customise your character</mat-card-subtitle>
+  
+    <form class="character-create-container" id="character-create" (ngSubmit)="create()">
+  
+      <!-- Name and portrait -->
+      <div class="character-create-section">
+        <h2 class="mat-h2">Profile</h2>
+        <h3 class="mat-h3">Choose a name and face</h3>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Name" name="name" [(ngModel)]="name" maxlength="12" required>
+        </mat-form-field>
+        <div class="selected-portrait">
+          <button mat-icon-button color="primary" type="button" (click)="changePortrait(-1)">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+          <div class="portrait-image">
+            <img src="assets/img/portraits/{{ selectedPortrait }}" alt="A character portrait">
+          </div>
+          <button mat-icon-button color="primary" type="button" (click)="changePortrait(1)">
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
         </div>
-        <button mat-icon-button color="primary" type="button" (click)="changePortrait(1)">
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
       </div>
-    </div>
-
-    <!-- Class -->
-    <div class="character-create-section">
-      <h2 class="mat-h2">Class</h2>
-      <h3 class="mat-h3">Choose your class</h3>
-      <div class="class-controls">
-        <mat-radio-group name="class" [(ngModel)]="selectedClass" (change)="resetStats()">
-          <mat-radio-button *ngFor="let class of classes" [value]="class">{{ class.name }}</mat-radio-button>
-        </mat-radio-group>
-      </div>
-      <div class="selected-class" *ngIf="selectedClass">
-        <!-- <div class="class-image">
-          <img src="assets/img/classes/{{ selectedClass.image }}" alt="{{ selectedClass.name }}">
-        </div> -->
-        <div class="class-detail">
-          <h3 class="mat-h3">Description</h3>
-          <p class="mat-body">{{ selectedClass.description }}</p>  
+  
+      <!-- Class -->
+      <div class="character-create-section">
+        <h2 class="mat-h2">Class</h2>
+        <h3 class="mat-h3">Choose your class</h3>
+        <div class="class-controls">
+          <mat-radio-group name="class" [(ngModel)]="selectedClass" (change)="resetStats()">
+            <mat-radio-button *ngFor="let class of classes" [value]="class">{{ class.name }}</mat-radio-button>
+          </mat-radio-group>
         </div>
-        <mat-list *ngIf="skills">
-          <h3 class="mat-h3">Starting Skills</h3>
-          <mat-list-item *ngFor="let skill of getClassSkills(selectedClass)">
-            <h3 matLine>{{ skill.name | titlecase }}</h3>
-            <p matLine>{{ skill.description }}</p>
-          </mat-list-item>
-        </mat-list>
+        <div class="selected-class" *ngIf="selectedClass">
+          <!-- <div class="class-image">
+            <img src="assets/img/classes/{{ selectedClass.image }}" alt="{{ selectedClass.name }}">
+          </div> -->
+          <div class="class-detail">
+            <h3 class="mat-h3">Description</h3>
+            <p class="mat-body">{{ selectedClass.description }}</p>  
+          </div>
+          <mat-list *ngIf="skills">
+            <h3 class="mat-h3">Starting Skills</h3>
+            <mat-list-item *ngFor="let skill of getClassSkills(selectedClass)">
+              <h3 matLine>{{ skill.name | titlecase }}</h3>
+              <p matLine>{{ skill.description }}</p>
+            </mat-list-item>
+          </mat-list>
+        </div>
       </div>
-    </div>
-
-    <!-- Roll stats -->
-    <div class="character-create-section">
-      <div class="stats-header">
-        <h2 class="mat-h2">Stats</h2>
-        <button mat-icon-button color="primary" type="button" (click)="rollStats()">
-          <mat-icon>refresh</mat-icon>
-        </button>  
+  
+      <!-- Roll stats -->
+      <div class="character-create-section">
+        <div class="stats-header">
+          <h2 class="mat-h2">Stats</h2>
+          <button mat-icon-button color="primary" type="button" (click)="rollStats()">
+            <mat-icon>refresh</mat-icon>
+          </button>  
+        </div>
+        <h3 class="mat-h3">Roll for your base statistics</h3>
+        <table #statTable mat-table [dataSource]="currentStats" class="full-width">
+          <ng-container matColumnDef="name">
+            <td mat-cell *matCellDef="let element"> {{ element.name | titlecase }} </td>
+          </ng-container>
+          <ng-container matColumnDef="value">
+            <td mat-cell *matCellDef="let element" class="text-center"> {{ element.value }} </td>
+          </ng-container>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
       </div>
-      <h3 class="mat-h3">Roll for your base statistics</h3>
-      <table #statTable mat-table [dataSource]="currentStats" class="full-width">
-        <ng-container matColumnDef="name">
-          <td mat-cell *matCellDef="let element"> {{ element.name | titlecase }} </td>
-        </ng-container>
-        <ng-container matColumnDef="value">
-          <td mat-cell *matCellDef="let element" class="text-center"> {{ element.value }} </td>
-        </ng-container>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div>
-  </form>
-
-  <mat-card-actions>
-    <button mat-raised-button color="primary" type="submit" form="character-create">Enter</button>
-  </mat-card-actions>
-</mat-card>
+    </form>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit" form="character-create">Enter</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,36 @@
+<mat-card class="player-card">
+  <mat-card-title>{{ player.name }}</mat-card-title>
+  <mat-card-subtitle>Level {{ player.level }} {{ player.cl.name }}</mat-card-subtitle>
+  <mat-card-content>
+    <div class="health-bar">
+      <div class="health" [style.width.%]="(player.health / player.maxHealth) * 100">
+        <h4 class="mat-h4">{{ player.health }} / {{ player.maxHealth }}</h4>
+      </div>
+    </div>
+    <div class="player-card-content">
+      <div class="portrait-image">
+        <img src="assets/img/portraits/{{ player.portrait }}" alt="Character portrait">
+      </div>
+      <div class="player-details">
+        <table class="full-width mat-table">
+          <tbody>
+            <tr class="mat-row" *ngFor="let stat of player.getStats('main') | keyvalue: originalOrder">
+              <td class="mat-cell">{{ stat.value.name }}</td>
+              <td class="mat-cell">{{ stat.value.base }}</td>
+              <td class="mat-cell">
+                <ng-container *ngIf="stat.value.modifier > 0">+</ng-container>
+                <ng-container *ngIf="stat.value.modifier">{{ stat.value.modifier }}</ng-container>
+              </td>
+              <td class="mat-cell">
+                <ng-container *ngIf="stat.value.battle > 0">+</ng-container>
+                <ng-container *ngIf="stat.value.battle">{{ stat.value.battle }}</ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+  </mat-card-actions>
+</mat-card>
