@@ -4,6 +4,10 @@
     "description": "Proud and honorable, specialising in brute strength. Primary stats are strength and constitution.",
     "image": "warrior.png",
     "trainer": "High Warlord",
+    "skills": [
+      "Attack",
+      "Cleave"
+    ],
     "minStats": {
       "strength": 10,
       "dexterity": 8,
@@ -24,6 +28,10 @@
     "description": "Trained in the arcane arts and proficient with all forms of magic. Primary stat is intelligence.",
     "image": "mage.jpg",
     "trainer": "Arch Mage",
+    "skills": [
+      "Attack",
+      "Magic Arrow"
+    ],
     "minStats": {
       "strength": 1,
       "dexterity": 3,
@@ -44,6 +52,10 @@
     "description": "Unscrupulous and underhanded, strikes from the shadows. Primary stats are dexterity and initiative.",
     "image": "rogue.jpg",
     "trainer": "Master Assassin",
+    "skills": [
+      "Attack",
+      "Backstab"
+    ],
     "minStats": {
       "strength": 7,
       "dexterity": 11,

@@ -7,7 +7,7 @@ export class Config {
   readonly skillPoints = 0; // Skill points to start with
   readonly gold = 0; // Gold the player starts with
   readonly rerolls = 10; // Number of rerolls allowed
-  readonly maxAbilities = 6; // Number of abilities allowed
+  readonly maxSkills = 6; // Number of abilities allowed
 
   // Experience required for each level
   readonly levelTier = [

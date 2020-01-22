@@ -3,6 +3,9 @@ import { CharacterCreateService } from './character-create.service';
 import { Class } from '../shared/interfaces/class';
 import Utils from '../shared/utils';
 import { MatTable } from '@angular/material/table';
+import { GameStatus, StateService } from '../shared/services/state.service';
+import { SkillsService } from '../shared/services/skills.service';
+import { Skill } from '../shared/interfaces/skill';
 
 @Component({
   selector: 'app-character-create',
@@ -12,6 +15,7 @@ import { MatTable } from '@angular/material/table';
 export class CharacterCreateComponent implements OnInit {
   portraits: string[];
   classes: Class[];
+  skills: Skill[];
 
   name: string;
   selectedPortrait: string;
@@ -22,7 +26,11 @@ export class CharacterCreateComponent implements OnInit {
   currentStats: { name: string, value: number }[] = [];
   @ViewChild('statTable', { static: true }) statTable: MatTable<any>;
 
-  constructor(private characterCreateService: CharacterCreateService) { }
+  constructor(
+    private characterCreateService: CharacterCreateService,
+    private skillsService: SkillsService,
+    private stateService: StateService
+  ) { }
 
   ngOnInit() {
     this.characterCreateService.getPortraits().subscribe(portraits => {
@@ -34,6 +42,20 @@ export class CharacterCreateComponent implements OnInit {
       this.selectedClass = this.classes[0];
       this.resetStats();
     });
+    this.skillsService.getSkills().subscribe(skills => {
+      this.skills = skills;
+    });
+  }
+
+  changePortrait(direction: number) {
+    const currentIndex = this.portraits.indexOf(this.selectedPortrait);
+    if (this.portraits[currentIndex + direction]) {
+      this.selectedPortrait = this.portraits[currentIndex + direction];
+    }
+  }
+
+  getClassSkills(cl: Class): Skill[] {
+    return this.skills.filter(skill => cl.skills.includes(skill.name));
   }
 
   rollStats() {
@@ -56,6 +78,17 @@ export class CharacterCreateComponent implements OnInit {
     }
     this.currentStats = stats;
     this.statTable.renderRows();
+  }
+
+  create() {
+    this.characterCreateService.createCharacter(
+      this.name,
+      this.selectedPortrait,
+      this.selectedClass,
+      this.currentStats,
+      this.getClassSkills(this.selectedClass)
+    );
+    this.stateService.moveTo(GameStatus.InPlay);
   }
 
 }

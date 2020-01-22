@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   }
 
   toCharacterCreate() {
-    this.stateService.moveTo(GameStatus.CharacterCreate)
+    this.stateService.moveTo(GameStatus.CharacterCreate);
   }
 
 }

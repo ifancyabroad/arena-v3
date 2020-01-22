@@ -3,6 +3,9 @@ import { Class } from '../shared/interfaces/class';
 import { of, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { PlayerService } from '../shared/services/player.service';
+import { Player } from '../shared/classes/player';
+import { Skill } from '../shared/interfaces/skill';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +14,7 @@ export class CharacterCreateService {
   private portraits: string[];
   private classes: Class[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private playerService: PlayerService) { }
 
   getPortraits(): Observable<string[]> {
     if (this.portraits) {
@@ -41,5 +44,22 @@ export class CharacterCreateService {
         })
       );
     }
+  }
+
+  createCharacter(
+    name: string,
+    portrait: string,
+    cl: Class,
+    stats: { name: string, value: number }[],
+    skills: Skill[]
+  ) {
+    this.playerService.player = new Player(
+      name,
+      portrait,
+      cl,
+      stats,
+      skills
+    );
+    console.log(this.playerService.player);
   }
 }

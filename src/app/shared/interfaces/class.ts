@@ -3,6 +3,7 @@ export interface Class {
   readonly description: string;
   readonly image: string;
   readonly trainer: string;
+  readonly skills: string[];
   readonly minStats: Stats;
   readonly maxStats: Stats;
 }
