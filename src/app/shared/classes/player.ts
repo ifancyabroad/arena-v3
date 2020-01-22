@@ -1,8 +1,10 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
+import { Stats, Class } from '../interfaces/class';
 
 export class Player extends GameEntity {
   type = 'player';
+
   level = 1; // Start at level 1
   kills = 0; // Kills starts at 0;
   experience = 0; // Experience starts at 0
@@ -25,11 +27,11 @@ export class Player extends GameEntity {
   constructor(
     public name: string,
     public portrait: string,
-    public cl: Object,
-    public st: Object,
+    public cl: Class,
+    public baseStats: Stats,
     public skills: Skill[]
   ) {
-    super(name, portrait, st, skills);
+    super(name, portrait, baseStats, skills);
 
     this.levelingTier = this.config.levelTier;
     this.skillPoints = this.config.skillPoints;
@@ -39,18 +41,20 @@ export class Player extends GameEntity {
   }
 
   // Find what level the player has earned through exp
-  levelTier = (): number => this.levelingTier.filter(level => this.experience >= level['exp']).pop()['level'];
+  get levelTier(): number {
+    return this.levelingTier.filter(level => this.experience >= level['exp']).pop()['level'];
+  }
 
-  // Gain exp and check if skill point is earned
-  experienceGain(xp): void {
-    const currentTier = this.levelTier();
+  // Experience
+  experienceGain(xp: number): void {
+    const currentTier = this.levelTier;
     this.experience += xp;
-    if (currentTier !== this.levelTier()) {
+    if (currentTier !== this.levelTier) {
       this.skillPoints += 1;
     }
   }
 
-  // Update inventory with new item
+  // Inventory management
   updateInventory(item): void {
     if (this.stats[this.inventory[item.type].modifier]) {
       this.stats[this.inventory[item.type].modifier].modifier -= this.inventory[item.type].value;
@@ -59,13 +63,12 @@ export class Player extends GameEntity {
     this.stats[this.inventory[item.type].modifier].modifier += this.inventory[item.type].value;
   }
 
-  // Learn a new skill
-  learnskill(skill): void {
+  // Skills
+  learnSkill(skill: Skill): void {
     this.skills.push(skill);
   }
 
-  // Forget an skill
-  forgetskill(skill): void {
+  forgetSkill(skill: Skill): void {
     this.skills.splice(this.skills.indexOf(skill), 1);
   }
 }

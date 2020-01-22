@@ -20,6 +20,7 @@ export class SkillsService {
         tap(data => {
           if (data) {
             this.skills = data;
+            this.skills.forEach(skill => skill.uses = skill.maxUses);
             return this.skills;
           }
         })

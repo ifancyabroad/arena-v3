@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CharacterCreateService } from './character-create.service';
-import { Class } from '../shared/interfaces/class';
+import { Class, Stats } from '../shared/interfaces/class';
 import Utils from '../shared/utils';
 import { MatTable } from '@angular/material/table';
 import { GameStatus, StateService } from '../shared/services/state.service';
@@ -81,11 +81,13 @@ export class CharacterCreateComponent implements OnInit {
   }
 
   create() {
+    const stats = {};
+    this.currentStats.forEach(stat => stats[stat.name] = stat.value);
     this.characterCreateService.createCharacter(
       this.name,
       this.selectedPortrait,
       this.selectedClass,
-      this.currentStats,
+      stats as Stats,
       this.getClassSkills(this.selectedClass)
     );
     this.stateService.moveTo(GameStatus.InPlay);

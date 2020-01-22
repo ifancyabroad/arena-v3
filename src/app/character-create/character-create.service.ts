@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Class } from '../shared/interfaces/class';
+import { Class, Stats } from '../shared/interfaces/class';
 import { of, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -50,7 +50,7 @@ export class CharacterCreateService {
     name: string,
     portrait: string,
     cl: Class,
-    stats: { name: string, value: number }[],
+    stats: Stats,
     skills: Skill[]
   ) {
     this.playerService.player = new Player(

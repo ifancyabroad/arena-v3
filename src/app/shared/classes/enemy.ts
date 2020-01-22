@@ -1,27 +1,28 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
 import Utils from '../utils';
+import { Stats } from '../interfaces/class';
+import { Player } from './player';
 
 export class Enemy extends GameEntity {
-
   type = 'enemy';
 
   constructor(
     public name: string,
     public portrait: string,
-    public st: Object,
+    public baseStats: Stats,
     public skills: Skill[],
     public armour = 0,
     public magicResistance = 0,
     public expValue: number,
     public goldValue: number
   ) {
-    super(name, portrait, st, skills, armour, magicResistance);
+    super(name, portrait, baseStats, skills, armour, magicResistance);
   }
 
   // AI to get the enemies choice of action
-  getAction(player): Object {
-    let options = this.skills.filter(skill => !skill['maxUses'] || skill['uses'] > 0); // Filter out skills with 0 uses
+  getAction(player: Player): Skill {
+    let options: Skill[] = this.skills.filter(skill => !skill.maxUses || skill.uses > 0); // Filter out skills with 0 uses
 
     options = this.getLowPriority(options, player);
     options = this.getHighPriority(options).length ? this.getHighPriority(options) : options;
@@ -31,10 +32,10 @@ export class Enemy extends GameEntity {
   }
 
   // Lowest priority (remove unimportant options)
-  getLowPriority(options, player) {
+  getLowPriority(options: Skill[], player: Player) {
     return options.filter(option => {
-      let reject;
-      option['effects'].forEach(effect => {
+      let reject: boolean;
+      option.effects.forEach(effect => {
         // Filter out active debuffs
         if (player.effectActive(effect) && effect.type === 'debuff') {
           reject = true;
@@ -44,25 +45,25 @@ export class Enemy extends GameEntity {
           reject = true;
         }
         // Filter out heals if health too high
-        if ((this.currentHealth / this.maxHealth()) * 100 > 80 && effect.type === 'heal') {
+        if ((this.health / this.maxHealth) * 100 > 80 && effect.type === 'heal') {
           reject = true;
         }
         // Filter out vs Warriors and Rogues
         if (player.cl.name === 'Warrior' || player.cl.name === 'Rogue') {
-          if (effect.type === 'buff' && effect.modifiers['magicResistance'] > 0) {
+          if (effect.type === 'buff' && effect.modifiers.magicResistance > 0) {
             reject = true;
           }
-          if (effect.type === 'debuff' && effect.modifiers['intelligence'] < 0) {
+          if (effect.type === 'debuff' && effect.modifiers.intelligence < 0) {
             reject = true;
           }
         }
         // Filter out vs Mages
         if (player.cl.name === 'Mage') {
-          if (effect.type === 'buff' && effect.modifiers['armour'] > 0) {
+          if (effect.type === 'buff' && effect.modifiers.armour > 0) {
             reject = true;
           }
           if (effect.type === 'debuff' &&
-            (effect.modifiers['strength'] < 0 || effect.modifiers['dexterity'] < 0)) {
+            (effect.modifiers.strength < 0 || effect.modifiers.dexterity < 0)) {
             reject = true;
           }
         }
@@ -72,36 +73,36 @@ export class Enemy extends GameEntity {
   }
 
   // Mid priority
-  getMidPriority(options, player) {
+  getMidPriority(options: Skill[], player: Player) {
     return options.filter(option => {
-      let priority;
-      option['effects'].forEach(effect => {
+      let priority: boolean;
+      option.effects.forEach(effect => {
         // Priority vs Warriors
         if (player.cl.name === 'Warrior') {
-          if (effect.type === 'buff' && effect.modifiers['armour'] > 0) {
+          if (effect.type === 'buff' && effect.modifiers.armour > 0) {
             priority = true;
           }
           if (effect.type === 'debuff' &&
-            (effect.modifiers['strength'] < 0 || effect.modifiers['dexterity'] < 0)) {
+            (effect.modifiers.dexterity < 0 || effect.modifiers.dexterity < 0)) {
             priority = true;
           }
         }
         // Priority vs Rogues
         if (player.cl.name === 'Rogue') {
-          if (effect.type === 'buff' && effect.modifiers['armour'] > 0) {
+          if (effect.type === 'buff' && effect.modifiers.armour > 0) {
             priority = true;
           }
           if (effect.type === 'debuff' &&
-            (effect.modifiers['dexterity'] < 0 || effect.modifiers['initiative'] < 0)) {
+            (effect.modifiers.dexterity < 0 || effect.modifiers.initiative < 0)) {
             priority = true;
           }
         }
         // Priority vs Mages
         if (player.cl.name === 'Mage') {
-          if (effect.type === 'buff' && effect.modifiers['magicResistance'] > 0) {
+          if (effect.type === 'buff' && effect.modifiers.magicResistance > 0) {
             priority = true;
           }
-          if (effect.type === 'debuff' && effect.modifiers['intelligence'] < 0) {
+          if (effect.type === 'debuff' && effect.modifiers.intelligence < 0) {
             priority = true;
           }
         }
@@ -111,12 +112,12 @@ export class Enemy extends GameEntity {
   }
 
   // Highest priority
-  getHighPriority(options) {
+  getHighPriority(options: Skill[]) {
     return options.filter(option => {
-      let priority;
-      option['effects'].forEach(effect => {
+      let priority: boolean;
+      option.effects.forEach(effect => {
         // Filter out everything but heals if health too low
-        if ((this.currentHealth / this.maxHealth()) * 100 < 40 && effect.type === 'heal') {
+        if ((this.health / this.maxHealth) * 100 < 40 && effect.type === 'heal') {
           priority = true;
         }
       });
