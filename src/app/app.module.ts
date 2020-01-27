@@ -13,7 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/Card';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { CharacterCreateComponent } from './character-create/character-create.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
@@ -21,6 +25,10 @@ import { ArenaComponent } from './arena/arena.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PlayerComponent } from './arena/player/player.component';
+import { HealerComponent } from './arena/healer/healer.component';
+import { StoreComponent } from './arena/store/store.component';
+import { TrainerComponent } from './arena/trainer/trainer.component';
+import { TavernComponent } from './arena/tavern/tavern.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,11 @@ import { PlayerComponent } from './arena/player/player.component';
     HomeComponent,
     GameComponent,
     ArenaComponent,
-    PlayerComponent
+    PlayerComponent,
+    HealerComponent,
+    StoreComponent,
+    TrainerComponent,
+    TavernComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +58,11 @@ import { PlayerComponent } from './arena/player/player.component';
     MatCardModule,
     MatInputModule,
     MatRadioModule,
-    MatTableModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

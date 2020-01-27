@@ -1,0 +1,13 @@
+.arena {
+  display: flex;
+  justify-content: center;
+
+  .player-card {
+    max-width: 400px;
+    margin-right: 2rem;
+  }
+
+  .town-card {
+    padding: 1rem;
+  }
+}

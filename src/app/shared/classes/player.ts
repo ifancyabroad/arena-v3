@@ -1,6 +1,7 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
 import { Stats, Class } from '../interfaces/class';
+import { Item } from '../interfaces/item';
 
 export class Player extends GameEntity {
   type = 'player';
@@ -54,8 +55,14 @@ export class Player extends GameEntity {
     }
   }
 
+  // Purchase item
+  buyItem(item: Item) {
+    this.gold -= item.value;
+    this.updateInventory(item);
+  }
+
   // Inventory management
-  updateInventory(item): void {
+  updateInventory(item: Item): void {
     if (this.stats[this.inventory[item.type].modifier]) {
       this.stats[this.inventory[item.type].modifier].modifier -= this.inventory[item.type].value;
     }
