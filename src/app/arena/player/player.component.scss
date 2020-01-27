@@ -1,8 +1,3 @@
-.player-card-content {
-  display: flex;
-  align-items: center;
-}
-
 .health-bar {
   position: relative;
   padding: 1px;
@@ -27,18 +22,28 @@
   }
 }
 
-.portrait-image {
-  height: 200px;
-  width: 150px;
-  overflow: hidden;
-  margin-right: 1rem;
+.player-card-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 
-  img {
-    max-width: 100%;
-    vertical-align: middle;
+  .portrait-image {
+    height: 200px;
+    width: 150px;
+    overflow: hidden;
+    margin-right: 1rem;
+  
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+  }
+  
+  .player-details {
+    flex-grow: 1;
   }
 }
 
-.player-details {
-  flex-grow: 1;
+.player-card-tab {
+  padding: 1rem;
 }

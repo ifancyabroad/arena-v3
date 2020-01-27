@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { CharacterCreateComponent } from './character-create/character-create.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
@@ -62,7 +63,8 @@ import { TavernComponent } from './arena/tavern/tavern.component';
     MatTableModule,
     MatTabsModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

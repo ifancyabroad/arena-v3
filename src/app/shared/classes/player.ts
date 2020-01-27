@@ -17,12 +17,12 @@ export class Player extends GameEntity {
 
   // Inventory starts empty
   inventory = {
-    head: { name: 'None' },
-    body: { name: 'None' },
-    gloves: { name: 'None' },
-    boots: { name: 'None' },
-    weapon: { name: 'None' },
-    misc: { name: 'None' }
+    head: null,
+    body: null,
+    gloves: null,
+    boots: null,
+    weapon: null,
+    misc: null
   };
 
   constructor(
@@ -63,7 +63,7 @@ export class Player extends GameEntity {
 
   // Inventory management
   updateInventory(item: Item): void {
-    if (this.stats[this.inventory[item.type].modifier]) {
+    if (this.inventory[item.type] && this.stats[this.inventory[item.type].modifier]) {
       this.stats[this.inventory[item.type].modifier].modifier -= this.inventory[item.type].value;
     }
     this.inventory[item.type] = item;
