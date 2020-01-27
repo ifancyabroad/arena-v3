@@ -27,4 +27,8 @@ export class SkillsService {
       );
     }
   }
+
+  getClassSkills(className: string, skills: Skill[]) {
+    return skills.filter(skill => skill.class === className && skill.level > 0);
+  }
 }

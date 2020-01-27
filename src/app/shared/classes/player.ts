@@ -57,7 +57,7 @@ export class Player extends GameEntity {
 
   // Purchase item
   buyItem(item: Item) {
-    this.gold -= item.value;
+    this.gold -= item.price;
     this.updateInventory(item);
   }
 
@@ -72,6 +72,7 @@ export class Player extends GameEntity {
 
   // Skills
   learnSkill(skill: Skill): void {
+    this.gold -= skill.price;
     this.skills.push(skill);
   }
 
