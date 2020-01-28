@@ -1,1 +1,14 @@
-<p>arena works!</p>
+<div class="main-container arena">
+  <div class="player-card">
+    <app-player [view]="'arena'" (skillUsed)="roundStart($event)"></app-player>
+  </div>
+
+  <div class="arena-content">
+    <div class="enemy-card" *ngIf="enemy">
+      <app-enemy [enemy]="enemy"></app-enemy>
+    </div>
+    <div class="log-card">
+      <app-combat-log></app-combat-log>
+    </div>
+  </div>
+</div>

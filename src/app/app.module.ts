@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CharacterCreateComponent } from './game/character-create/character-create.component';
 import { HomeComponent } from './game/home/home.component';
 import { GameComponent } from './game/game.component';
@@ -31,6 +32,8 @@ import { StoreComponent } from './game/town/store/store.component';
 import { TrainerComponent } from './game/town/trainer/trainer.component';
 import { TavernComponent } from './game/town/tavern/tavern.component';
 import { ArenaComponent } from './game/arena/arena.component';
+import { EnemyComponent } from './game/arena/enemy/enemy.component';
+import { CombatLogComponent } from './game/arena/combat-log/combat-log.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { ArenaComponent } from './game/arena/arena.component';
     StoreComponent,
     TrainerComponent,
     TavernComponent,
-    ArenaComponent
+    ArenaComponent,
+    EnemyComponent,
+    CombatLogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,8 @@ import { ArenaComponent } from './game/arena/arena.component';
     MatTabsModule,
     MatPaginatorModule,
     MatSortModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

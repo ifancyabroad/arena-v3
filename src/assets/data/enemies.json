@@ -9,7 +9,7 @@
 			"intelligence": 2,
 			"initiative": 6
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
       "Quick Fingers",
       "Go For The Eyes"
@@ -30,7 +30,7 @@
 			"intelligence": 2,
 			"initiative": 6
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
       "Acrobatic Strike",
       "Agile Footwork"
@@ -50,7 +50,7 @@
 			"intelligence": 1,
 			"initiative": 7
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Takedown Attack"
 		],
@@ -68,7 +68,7 @@
 			"intelligence": 11,
 			"initiative": 8
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
       "Colour Spray",
       "Magic Missiles",
@@ -90,7 +90,7 @@
 			"intelligence": 1,
 			"initiative": 6
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Backstab"
 		],
@@ -109,7 +109,7 @@
 			"intelligence": 4,
 			"initiative": 10
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Gap In The Armour",
       "Press The Advantage"
@@ -130,7 +130,7 @@
 			"intelligence": 3,
 			"initiative": 7
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Cleave",
 			"Berserk",
@@ -152,7 +152,7 @@
 			"intelligence": 2,
 			"initiative": 4
 		},
-		"abilities": [
+		"skills": [
       "Attack",
       "Cleave",
 			"One-Two Punch",
@@ -173,7 +173,7 @@
 			"intelligence": 1,
 			"initiative": 4
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Takedown Attack",
 			"Lunging Strike",
@@ -196,7 +196,7 @@
 			"intelligence": 3,
 			"initiative": 12
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Takedown Attack",
       "Lunging Strike",
@@ -217,7 +217,7 @@
 			"intelligence": 14,
 			"initiative": 8
 		},
-		"abilities": [
+		"skills": [
       "Attack",
       "Magic Arrow",
 			"Magic Missiles",
@@ -241,7 +241,7 @@
 			"intelligence": 4,
 			"initiative": 9
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Precise Strike",
 			"Gap In The Armour",
@@ -264,7 +264,7 @@
 			"intelligence": 1,
 			"initiative": 6
 		},
-		"abilities": [
+		"skills": [
       "Attack",
       "Crushing Blow",
 			"One-Two Punch",
@@ -285,7 +285,7 @@
 			"intelligence": 2,
 			"initiative": 5
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Dizzying Blow",
 			"Brutal Advance"
@@ -306,7 +306,7 @@
 			"intelligence": 14,
 			"initiative": 10
 		},
-		"abilities": [
+		"skills": [
       "Attack",
       "Cripple",
 			"Lightning Bolt",
@@ -330,7 +330,7 @@
 			"intelligence": 1,
 			"initiative": 1
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Takedown Attack",
 			"Stand Ground"
@@ -351,7 +351,7 @@
 			"intelligence": 7,
 			"initiative": 7
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Cleave",
 			"Stand Ground",
@@ -374,7 +374,7 @@
 			"intelligence": 18,
 			"initiative": 11
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Magic Missiles",
 			"Fireball",
@@ -399,7 +399,7 @@
 			"intelligence": 9,
 			"initiative": 14
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Acrobatic Strike",
 			"Precise Strike",
@@ -425,7 +425,7 @@
 			"intelligence": 6,
 			"initiative": 16
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Whirlwind Strike",
 			"Acrobatic Strike",
@@ -449,7 +449,7 @@
 			"intelligence": 4,
 			"initiative": 12
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Lunging Strike",
 			"Acrobatic Strike",
@@ -472,7 +472,7 @@
 			"intelligence": 15,
 			"initiative": 11
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Acrobatic Strike",
 			"Cloak Of Shadows",
@@ -497,7 +497,7 @@
 			"intelligence": 26,
 			"initiative": 15
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Fireball",
 			"Chain Lightning",
@@ -521,7 +521,7 @@
 			"intelligence": 22,
 			"initiative": 15
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Chain Lightning",
 			"Iron Skin",
@@ -545,7 +545,7 @@
 			"intelligence": 2,
 			"initiative": 8
 		},
-		"abilities": [
+		"skills": [
       "Attack",
       "Crushing Blow",
 			"Stand Ground",
@@ -568,7 +568,7 @@
 			"intelligence": 23,
 			"initiative": 15
 		},
-		"abilities": [
+		"skills": [
 			"Attack",
 			"Lunging Strike",
 			"Takedown Attack",

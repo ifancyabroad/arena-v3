@@ -1,0 +1,21 @@
+.arena {
+  display: flex;
+  justify-content: center;
+
+  .player-card {
+    width: 400px;
+    margin-right: 2rem;
+  }
+
+  .arena-content {
+
+    .enemy-card {
+      margin-bottom: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

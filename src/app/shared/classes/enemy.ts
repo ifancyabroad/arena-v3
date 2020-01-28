@@ -1,8 +1,8 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
-import Utils from '../utils';
 import { Stats } from '../interfaces/class';
 import { Player } from './player';
+import Utils from '../utils';
 
 export class Enemy extends GameEntity {
   type = 'enemy';

@@ -1,0 +1,33 @@
+<mat-card>
+  <mat-card-title>{{ enemy.name }}</mat-card-title>
+  <mat-card-content>
+    <div class="health-bar">
+      <div class="health" [style.width.%]="(enemy.health / enemy.maxHealth) * 100">
+        <h4 class="mat-h4">{{ enemy.health }} / {{ enemy.maxHealth }}</h4>
+      </div>
+    </div>
+    <div class="enemy-card-content">
+      <div class="enemy-details">
+        <table class="full-width">
+          <tbody>
+            <tr *ngFor="let stat of enemy.getStats('main') | keyvalue: originalOrder">
+              <td>{{ stat.value.name }}</td>
+              <td>{{ stat.value.base }}</td>
+              <td>
+                <ng-container *ngIf="stat.value.modifier > 0">+</ng-container>
+                <ng-container *ngIf="stat.value.modifier">{{ stat.value.modifier }}</ng-container>
+              </td>
+              <td>
+                <ng-container *ngIf="stat.value.battle > 0">+</ng-container>
+                <ng-container *ngIf="stat.value.battle">{{ stat.value.battle }}</ng-container>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="enemy-image">
+        <img src="assets/img/monsters/{{ enemy.portrait }}" [alt]="enemy.name">
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

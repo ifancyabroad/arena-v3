@@ -12,16 +12,16 @@
         <img src="assets/img/portraits/{{ player.portrait }}" alt="Character portrait">
       </div>
       <div class="player-details">
-        <table class="full-width mat-table">
+        <table class="full-width">
           <tbody>
-            <tr class="mat-row" *ngFor="let stat of player.getStats('main') | keyvalue: originalOrder">
-              <td class="mat-cell">{{ stat.value.name }}</td>
-              <td class="mat-cell">{{ stat.value.base }}</td>
-              <td class="mat-cell">
+            <tr *ngFor="let stat of player.getStats('main') | keyvalue: originalOrder">
+              <td>{{ stat.value.name }}</td>
+              <td>{{ stat.value.base }}</td>
+              <td>
                 <ng-container *ngIf="stat.value.modifier > 0">+</ng-container>
                 <ng-container *ngIf="stat.value.modifier">{{ stat.value.modifier }}</ng-container>
               </td>
-              <td class="mat-cell">
+              <td>
                 <ng-container *ngIf="stat.value.battle > 0">+</ng-container>
                 <ng-container *ngIf="stat.value.battle">{{ stat.value.battle }}</ng-container>
               </td>
@@ -30,7 +30,9 @@
         </table>
       </div>
     </div>
-    <mat-tab-group mat-stretch-tabs>
+
+    <!--Town View-->
+    <mat-tab-group mat-stretch-tabs *ngIf="view === 'town'">
       <mat-tab>
         <ng-template mat-tab-label>Inventory</ng-template>
         <div class="player-card-tab">
@@ -60,6 +62,20 @@
         </div>
       </mat-tab>
     </mat-tab-group>
+
+    <!--Battle View-->
+    <mat-list *ngIf="view === 'arena'">
+      <h3 mat-subheader>Skills</h3>
+      <ng-container *ngFor="let skill of player.skills; last as isLast">
+        <mat-list-item>
+          <mat-icon matListIcon [matTooltip]="skill.description" matTooltipPosition="above">info</mat-icon>
+          <h4 mat-line>{{ skill.name }}</h4>
+          <p mat-line>Uses: {{ skill.maxUses ? skill.uses + ' / ' + skill.maxUses : 'Unlimited' }}</p>
+          <button mat-raised-button color="primary" [disabled]="skill.maxUses > 0 && skill.uses <= 0" (click)="useSkill(skill)">Use</button>
+        </mat-list-item>
+        <mat-divider *ngIf="!isLast"></mat-divider>
+      </ng-container>
+    </mat-list>
   </mat-card-content>
   <mat-card-actions>
   </mat-card-actions>
