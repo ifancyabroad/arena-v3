@@ -22,14 +22,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { CharacterCreateComponent } from './character-create/character-create.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
-import { ArenaComponent } from './arena/arena.component';
+import { TownComponent } from './town/town.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PlayerComponent } from './arena/player/player.component';
-import { HealerComponent } from './arena/healer/healer.component';
-import { StoreComponent } from './arena/store/store.component';
-import { TrainerComponent } from './arena/trainer/trainer.component';
-import { TavernComponent } from './arena/tavern/tavern.component';
+import { PlayerComponent } from './town/player/player.component';
+import { HealerComponent } from './town/healer/healer.component';
+import { StoreComponent } from './town/store/store.component';
+import { TrainerComponent } from './town/trainer/trainer.component';
+import { TavernComponent } from './town/tavern/tavern.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,7 @@ import { TavernComponent } from './arena/tavern/tavern.component';
     CharacterCreateComponent,
     HomeComponent,
     GameComponent,
-    ArenaComponent,
+    TownComponent,
     PlayerComponent,
     HealerComponent,
     StoreComponent,
