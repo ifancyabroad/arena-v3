@@ -3,7 +3,7 @@
 
   .character-create-section {
     width: calc(100% / 3);
-    padding: 1rem;
+    padding: 2rem;
   }
 }
 
@@ -33,23 +33,6 @@
 
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 2rem;
-}
-
-.selected-class {
-  // display: flex;
-  // align-items: center;
-  
-  // .class-image {
-  //   width: 40%;
-
-  //   img {
-  //     max-width: 80%;
-  //   }
-  // }
-
-  // .class-detail {
-  //   width: 60%;
-  // }
 }
 
 .stats-header {

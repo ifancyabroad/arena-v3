@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CharacterCreateService } from './character-create.service';
 import { Class, Stats } from '../shared/interfaces/class';
-import Utils from '../shared/utils';
-import { MatTable } from '@angular/material/table';
 import { GameStatus, StateService } from '../shared/services/state.service';
 import { SkillsService } from '../shared/services/skills.service';
 import { Skill } from '../shared/interfaces/skill';
+import Utils from '../shared/utils';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-character-create',
@@ -22,9 +22,11 @@ export class CharacterCreateComponent implements OnInit {
   selectedClass: Class;
 
   rerolls = 10;
-  displayedColumns: string[] = ['name', 'value'];
-  currentStats: { name: string, value: number }[] = [];
-  @ViewChild('statTable', { static: true }) statTable: MatTable<any>;
+  currentStats: {
+    Warrior?: Stats,
+    Mage?: Stats,
+    Rogue?: Stats
+  } = {};
 
   constructor(
     private characterCreateService: CharacterCreateService,
@@ -39,8 +41,8 @@ export class CharacterCreateComponent implements OnInit {
     });
     this.characterCreateService.getClasses().subscribe(classes => {
       this.classes = classes;
+      this.classes.forEach(cl => this.rollStats(cl));
       this.selectedClass = this.classes[0];
-      this.resetStats();
     });
     this.skillsService.getSkills().subscribe(skills => {
       this.skills = skills;
@@ -58,39 +60,42 @@ export class CharacterCreateComponent implements OnInit {
     return this.skills.filter(skill => cl.skills.includes(skill.name));
   }
 
-  rollStats() {
-    if (this.rerolls) {
+  rollStats(cl: Class, reroll?: boolean) {
+    if (reroll && !this.rerolls) {
+      return
+    } else if (reroll && this.rerolls) {
       this.rerolls--;
-      const minStats = this.selectedClass.minStats;
-      const maxStats = this.selectedClass.maxStats;
-      this.currentStats.forEach(stat => {
-        stat.value = Utils.roll(minStats[stat.name], maxStats[stat.name]);
-      });
-      this.statTable.renderRows();
     }
-  }
 
-  resetStats() {
-    const statNames = Object.keys(this.selectedClass.minStats);
-    const stats = [];
-    for (let stat of statNames) {
-      stats.push({ name: stat, value: 0 })
-    }
-    this.currentStats = stats;
-    this.statTable.renderRows();
+    const minStats = cl.minStats;
+    const maxStats = cl.maxStats;
+    const rolledStats = {};
+    const statKeys = Object.keys(minStats);
+    statKeys.forEach(stat => {
+      rolledStats[stat] = Utils.roll(minStats[stat], maxStats[stat]);
+    });
+    this.currentStats[cl.name] = rolledStats;
   }
 
   create() {
-    const stats = {};
-    this.currentStats.forEach(stat => stats[stat.name] = stat.value);
-    this.characterCreateService.createCharacter(
-      this.name,
-      this.selectedPortrait,
-      this.selectedClass,
-      stats as Stats,
-      this.getClassSkills(this.selectedClass)
-    );
-    this.stateService.moveTo(GameStatus.InPlay);
+    if (this.checkValid()) {
+      this.characterCreateService.createCharacter(
+        this.name,
+        this.selectedPortrait,
+        this.selectedClass,
+        this.currentStats[this.selectedClass.name],
+        this.getClassSkills(this.selectedClass)
+      );
+      this.stateService.moveTo(GameStatus.InPlay);
+    }
+  }
+
+  checkValid(): boolean {
+    return !!(this.name && this.name.length);
+  }
+
+  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
+    return 0;
   }
 
 }
