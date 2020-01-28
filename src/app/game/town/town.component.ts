@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameStatus, StateService } from 'src/app/shared/services/state.service';
 
 @Component({
   selector: 'app-town',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TownComponent implements OnInit {
 
-  constructor() { }
+  constructor(private stateService: StateService) { }
 
   ngOnInit() {
+  }
+
+  nextFight() {
+    this.stateService.moveTo(GameStatus.Arena);
   }
 
 }

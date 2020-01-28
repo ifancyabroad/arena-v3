@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export enum GameStatus {
-  Home, CharacterCreate, InPlay
+  Home, CharacterCreate, Town, Arena
 }
 
 @Injectable({

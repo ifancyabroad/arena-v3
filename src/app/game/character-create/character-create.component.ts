@@ -86,7 +86,7 @@ export class CharacterCreateComponent implements OnInit {
         this.currentStats[this.selectedClass.name],
         this.getClassSkills(this.selectedClass)
       );
-      this.stateService.moveTo(GameStatus.InPlay);
+      this.stateService.moveTo(GameStatus.Town);
     }
   }
 

@@ -30,6 +30,7 @@ import { HealerComponent } from './game/town/healer/healer.component';
 import { StoreComponent } from './game/town/store/store.component';
 import { TrainerComponent } from './game/town/trainer/trainer.component';
 import { TavernComponent } from './game/town/tavern/tavern.component';
+import { ArenaComponent } from './game/arena/arena.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TavernComponent } from './game/town/tavern/tavern.component';
     HealerComponent,
     StoreComponent,
     TrainerComponent,
-    TavernComponent
+    TavernComponent,
+    ArenaComponent
   ],
   imports: [
     BrowserModule,

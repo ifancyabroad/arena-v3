@@ -25,8 +25,7 @@
         Healer
       </ng-template>
       <div class="town-card">
-        <h1>Terrible sushi restaurants</h1>
-        <p>...</p>
+        <app-healer></app-healer>
       </div>
     </mat-tab>
     <mat-tab>
@@ -34,8 +33,7 @@
         Tavern
       </ng-template>
       <div class="town-card">
-        <h1>Terrible sushi restaurants</h1>
-        <p>...</p>
+        <app-tavern></app-tavern>
       </div>
     </mat-tab>
     <mat-tab>
@@ -43,8 +41,13 @@
         Arena
       </ng-template>
       <div class="town-card">
-        <h1>Terrible sushi restaurants</h1>
-        <p>...</p>
+        <mat-card>
+          <mat-card-title>Arena</mat-card-title>
+          <mat-card-subtitle>Are you prepared for the next fight?</mat-card-subtitle>
+          <mat-card-content>
+            <button mat-raised-button color="primary" (click)="nextFight()">Enter the Arena!</button>
+          </mat-card-content>
+        </mat-card>
       </div>
     </mat-tab>
   </mat-tab-group>
