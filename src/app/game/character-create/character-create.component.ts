@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterCreateService } from './character-create.service';
-import { Class, Stats } from '../shared/interfaces/class';
-import { GameStatus, StateService } from '../shared/services/state.service';
-import { SkillsService } from '../shared/services/skills.service';
-import { Skill } from '../shared/interfaces/skill';
-import Utils from '../shared/utils';
+import { Class, Stats } from '../../shared/interfaces/class';
+import { GameStatus, StateService } from '../../shared/services/state.service';
+import { SkillsService } from '../../shared/services/skills.service';
+import { Skill } from '../../shared/interfaces/skill';
+import Utils from '../../shared/utils';
 import { KeyValue } from '@angular/common';
 
 @Component({

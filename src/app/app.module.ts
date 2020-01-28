@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,17 +20,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CharacterCreateComponent } from './character-create/character-create.component';
-import { HomeComponent } from './home/home.component';
+import { CharacterCreateComponent } from './game/character-create/character-create.component';
+import { HomeComponent } from './game/home/home.component';
 import { GameComponent } from './game/game.component';
-import { TownComponent } from './town/town.component';
-import { FormsModule } from '@angular/forms';
+import { TownComponent } from './game/town/town.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PlayerComponent } from './town/player/player.component';
-import { HealerComponent } from './town/healer/healer.component';
-import { StoreComponent } from './town/store/store.component';
-import { TrainerComponent } from './town/trainer/trainer.component';
-import { TavernComponent } from './town/tavern/tavern.component';
+import { PlayerComponent } from './game/town/player/player.component';
+import { HealerComponent } from './game/town/healer/healer.component';
+import { StoreComponent } from './game/town/store/store.component';
+import { TrainerComponent } from './game/town/trainer/trainer.component';
+import { TavernComponent } from './game/town/tavern/tavern.component';
 
 @NgModule({
   declarations: [

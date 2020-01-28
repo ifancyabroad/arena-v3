@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Class, Stats } from '../shared/interfaces/class';
+import { Class, Stats } from '../../shared/interfaces/class';
 import { of, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { PlayerService } from '../shared/services/player.service';
-import { Player } from '../shared/classes/player';
-import { Skill } from '../shared/interfaces/skill';
+import { PlayerService } from '../../shared/services/player.service';
+import { Player } from '../../shared/classes/player';
+import { Skill } from '../../shared/interfaces/skill';
 
 @Injectable({
   providedIn: 'root'
