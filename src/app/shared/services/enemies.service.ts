@@ -3,6 +3,9 @@ import { Stats } from '../interfaces/class';
 import { of, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { SkillsService } from './skills.service';
+import { Enemy } from '../classes/enemy';
+import Utils from '../../shared/utils';
 
 export interface EnemyData {
   readonly name: string;
@@ -20,11 +23,14 @@ export interface EnemyData {
   providedIn: 'root'
 })
 export class EnemiesService {
-  enemies: EnemyData[];
+  private enemies: EnemyData[];
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private skillsService: SkillsService
+  ) { }
 
-  // Get full list of enemies
+  // Get full list of enemies data
   getEnemies(): Observable<EnemyData[]> {
     if (this.enemies) {
       return of(this.enemies);
@@ -38,5 +44,22 @@ export class EnemiesService {
         })
       );
     }
+  }
+
+  // Create an enemy
+  createEnemy(challenge?: number): Enemy {
+    const enemyTier = this.enemies.filter(e => challenge >= e.challenge);
+    const enemy = enemyTier[Utils.roll(0, enemyTier.length - 1)];
+
+    return new Enemy(
+      enemy.name,
+      enemy.portrait,
+      enemy.stats,
+      this.skillsService.getSkillsFromArray(enemy.skills),
+      enemy.armour,
+      enemy.magicResistance,
+      enemy.expValue,
+      enemy.goldValue
+    );
   }
 }

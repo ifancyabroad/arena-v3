@@ -3,7 +3,6 @@ import { CharacterCreateService } from './character-create.service';
 import { Class, Stats } from '../../shared/interfaces/class';
 import { GameStatus, StateService } from '../../shared/services/state.service';
 import { SkillsService } from '../../shared/services/skills.service';
-import { Skill } from '../../shared/interfaces/skill';
 import Utils from '../../shared/utils';
 import { KeyValue } from '@angular/common';
 
@@ -15,7 +14,6 @@ import { KeyValue } from '@angular/common';
 export class CharacterCreateComponent implements OnInit {
   portraits: string[];
   classes: Class[];
-  skills: Skill[];
 
   name: string;
   selectedPortrait: string;
@@ -44,9 +42,6 @@ export class CharacterCreateComponent implements OnInit {
       this.classes.forEach(cl => this.rollStats(cl));
       this.selectedClass = this.classes[0];
     });
-    this.skillsService.getSkills().subscribe(skills => {
-      this.skills = skills;
-    });
   }
 
   changePortrait(direction: number) {
@@ -54,10 +49,6 @@ export class CharacterCreateComponent implements OnInit {
     if (this.portraits[currentIndex + direction]) {
       this.selectedPortrait = this.portraits[currentIndex + direction];
     }
-  }
-
-  getClassSkills(cl: Class): Skill[] {
-    return this.skills.filter(skill => cl.skills.includes(skill.name));
   }
 
   rollStats(cl: Class, reroll?: boolean) {
@@ -84,7 +75,7 @@ export class CharacterCreateComponent implements OnInit {
         this.selectedPortrait,
         this.selectedClass,
         this.currentStats[this.selectedClass.name],
-        this.getClassSkills(this.selectedClass)
+        this.skillsService.getSkillsFromArray(this.selectedClass.skills)
       );
       this.stateService.moveTo(GameStatus.Town);
     }

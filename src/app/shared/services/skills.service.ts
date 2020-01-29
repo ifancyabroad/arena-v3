@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SkillsService {
-  private skills: Skill[]; // List of abilities separated by class
+  private skills: Skill[];
 
   constructor(private http: HttpClient) { }
 
@@ -28,7 +28,11 @@ export class SkillsService {
     }
   }
 
-  getClassSkills(className: string, skills: Skill[]) {
-    return skills.filter(skill => skill.class === className && skill.level > 0);
+  getClassSkills(className: string): Skill[] {
+    return this.skills.filter(skill => skill.class === className.toLowerCase() && skill.level > 0);
+  }
+
+  getSkillsFromArray(skillsArray: string[]): Skill[] {
+    return this.skills.filter(skill => skillsArray.includes(skill.name));
   }
 }

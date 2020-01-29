@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Skill } from 'src/app/shared/interfaces/skill';
 import { Enemy } from 'src/app/shared/classes/enemy';
-import { SkillsService } from 'src/app/shared/services/skills.service';
-import { EnemiesService, EnemyData } from 'src/app/shared/services/enemies.service';
-import { switchMap } from 'rxjs/operators';
-import Utils from '../../shared/utils';
+import { EnemiesService } from 'src/app/shared/services/enemies.service';
+import { BattleService, BattleState } from './battle.service';
+import { PlayerService } from 'src/app/shared/services/player.service';
+import { Player } from 'src/app/shared/classes/player';
 
 @Component({
   selector: 'app-arena',
@@ -12,50 +12,28 @@ import Utils from '../../shared/utils';
   styleUrls: ['./arena.component.scss']
 })
 export class ArenaComponent implements OnInit {
-  skills: Skill[];
-  enemies: EnemyData[];
+  player: Player;
   enemy: Enemy;
 
   constructor(
-    private skillsService: SkillsService,
-    private enemiesService: EnemiesService
+    private playerService: PlayerService,
+    private enemiesService: EnemiesService,
+    private battleService: BattleService
   ) { }
 
   ngOnInit() {
-    this.skillsService.getSkills().pipe(
-      switchMap(skills => {
-        this.skills = skills;
-        return this.enemiesService.getEnemies();
-      })
-    ).subscribe(enemies => {
-      this.enemies = enemies;
-      this.setEnemy();
-    });
-  }
-
-  getEnemySkills(enemy: EnemyData): Skill[] {
-    return this.skills.filter(skill => enemy.skills.includes(skill.name));
-  }
-
-  setEnemy() {
-    const enemyTier = this.enemies.filter(e => 2 >= e.challenge);
-    const enemy = enemyTier[Utils.roll(0, enemyTier.length - 1)];
-
-    this.enemy = new Enemy(
-      enemy.name,
-      enemy.portrait,
-      enemy.stats,
-      this.getEnemySkills(enemy),
-      enemy.armour,
-      enemy.magicResistance,
-      enemy.expValue,
-      enemy.goldValue
-    );
+    this.player = this.playerService.player;
+    this.enemy = this.enemiesService.createEnemy(2)
+    console.log(this.enemy);
   }
 
   // Check turn order and begin the round
   roundStart(playerSkill: Skill) {
-    console.log(playerSkill);
+    if (this.player.stats.initiative.total >= this.enemy.stats.initiative.total) {
+      this.battleService.battleState.next(BattleState.PlayerTurn);
+    } else {
+      this.battleService.battleState.next(BattleState.EnemyTurn);
+    }
   }
 
 }

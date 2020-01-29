@@ -20,8 +20,8 @@ export class TrainerComponent implements OnInit {
   dataSource: MatTableDataSource<Skill>;
   selection = new SelectionModel<Skill>(true, []);
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private playerService: PlayerService,
@@ -30,12 +30,11 @@ export class TrainerComponent implements OnInit {
 
   ngOnInit() {
     this.player = this.playerService.player;
-    this.skillsService.getSkills().subscribe(skills => {
-      const classSkills = this.skillsService.getClassSkills(this.player.cl.name.toLowerCase(), skills);
-      this.dataSource = new MatTableDataSource(classSkills);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
+
+    const classSkills = this.skillsService.getClassSkills(this.player.cl.name.toLowerCase());
+    this.dataSource = new MatTableDataSource(classSkills);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   // Check the player has enough gold

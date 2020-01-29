@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ItemsService {
-  items: Item[];
+  private items: Item[];
 
   constructor(private http: HttpClient) { }
 
