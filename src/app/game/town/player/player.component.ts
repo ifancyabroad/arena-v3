@@ -11,6 +11,7 @@ import { Skill } from 'src/app/shared/interfaces/skill';
 })
 export class PlayerComponent implements OnInit {
   @Input() view = 'town';
+  @Input() waiting = false;
   player: Player;
 
   @Output() skillUsed = new EventEmitter<Skill>();

@@ -71,7 +71,13 @@
           <mat-icon matListIcon [matTooltip]="skill.description" matTooltipPosition="above">info</mat-icon>
           <h4 mat-line>{{ skill.name }}</h4>
           <p mat-line>Uses: {{ skill.maxUses ? skill.uses + ' / ' + skill.maxUses : 'Unlimited' }}</p>
-          <button mat-raised-button color="primary" [disabled]="skill.maxUses > 0 && skill.uses <= 0" (click)="useSkill(skill)">Use</button>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="skill.maxUses > 0 && skill.uses <= 0 && waiting"
+            (click)="useSkill(skill)">
+            Use
+          </button>
         </mat-list-item>
         <mat-divider *ngIf="!isLast"></mat-divider>
       </ng-container>

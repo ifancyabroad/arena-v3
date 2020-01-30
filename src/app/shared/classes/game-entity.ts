@@ -132,7 +132,7 @@ export class GameEntity {
   }
 
   get isAlive(): boolean {
-    return this.health <= 0;
+    return this.health > 0;
   }
 
   get hitChance(): number {
@@ -186,7 +186,7 @@ export class GameEntity {
     if (effect.modifiers) {
       this.updateEffectModifiers(effect, 'add');
     }
-    this.refreshEffect(effect);
+    effect.remaining = effect.duration;
     this.activeEffects.push(effect);
   }
 

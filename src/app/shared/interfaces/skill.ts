@@ -18,6 +18,7 @@ export interface SkillEffect {
   readonly max?: number;
   readonly modifiers?: { [key: string]: number };
   readonly accuracy?: number;
+  readonly value?: number;
   readonly duration?: number;
   remaining?: number
 }
