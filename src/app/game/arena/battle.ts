@@ -53,7 +53,6 @@ export class Battle {
       this.setRound(this.enemy, this.player, skill, 1);
     }
     this.turn();
-    this.endTurn();
   }
 
   // Set the round details
@@ -88,23 +87,25 @@ export class Battle {
     if (this.round.turn.attacker.checkEffects()) {
       this.getEffects();
       this.processEffects();
-      console.log(this.round);
     }
+    console.log(this.round);
+    this.turnChecks();
   }
 
   // End of the turn
   // Check the current state of both entities
-  private endTurn() {
-    if (!this.round.turn.defender.isAlive) {
-      if (this.round.turn.defender.type === 'enemy') {
-        this.state.next(BattleState.Victory);
-      } else {
-        this.state.next(BattleState.Defeat);
-      }
+  private turnChecks() {
+    if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'enemy') {
+      this.player.removeEffects();
+      this.state.next(BattleState.Victory);
+    } else if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'player') {
+      this.state.next(BattleState.Defeat);
     } else if (this.round.turn.counter === 2) {
+      this.player.updateEffects();
+      this.enemy.updateEffects();
       this.state.next(BattleState.Waiting);
     } else {
-      this.setRound(this.round.turn.defender, this.round.turn.attacker, this.round.playerAction, 2)
+      this.setRound(this.round.turn.defender, this.round.turn.attacker, this.round.playerAction, 2);
       this.turn();
     } 
   }

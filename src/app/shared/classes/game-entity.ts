@@ -177,7 +177,7 @@ export class GameEntity {
   )
 
   // Effects
-  effectActive = (effect: SkillEffect): boolean => this.activeEffects.indexOf(effect) > -1;
+  effectActive = (effect: SkillEffect): boolean => this.activeEffects.includes(effect);
   effectHit = (effect: SkillEffect): boolean => effect.accuracy >= Utils.roll(1, 100);
 
   checkEffects = (): boolean => this.activeEffects.filter(effect => effect.type === 'incapacitate').length === 0;
