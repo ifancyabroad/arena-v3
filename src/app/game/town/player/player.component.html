@@ -74,7 +74,7 @@
           <button
             mat-raised-button
             color="primary"
-            [disabled]="skill.maxUses > 0 && skill.uses <= 0 && waiting"
+            [disabled]="(skill.maxUses > 0 && skill.uses <= 0) || !waiting"
             (click)="useSkill(skill)">
             Use
           </button>
