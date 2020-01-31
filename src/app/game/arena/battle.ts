@@ -7,8 +7,9 @@ export enum BattleState {
   Waiting, Turn, Victory, Defeat
 }
 
-enum RoundState {
-  PlayerTurn, EnemyTurn
+interface Round {
+  playerAction: Skill,
+  turn: Turn,
 }
 
 interface Turn {
@@ -16,17 +17,22 @@ interface Turn {
   readonly attacker: Player | Enemy;
   readonly defender: Player | Enemy;
   readonly skill: Skill;
+  action: {
+    plane: string;
+    attack: boolean;
+    hit: boolean;
+    attacks: EffectData[],
+    heals: EffectData[],
+    effects: EffectData[]
+  };
 }
 
-interface Round {
-  roundState: RoundState,
-  playerAction: Skill,
-  turn: Turn,
-}
-
-interface Attack {
-  damage?: number;
-  action?: string;
+interface EffectData {
+  target?: Player | Enemy;
+  hitType?: 'hit' | 'crit' | 'miss';
+  value?: number;
+  effect?: SkillEffect;
+  existing?: boolean;
 }
 
 export class Battle {
@@ -38,30 +44,8 @@ export class Battle {
     public enemy: Enemy
   ) { }
 
-  private speedCheck = () => this.player.stats.initiative.total >= this.enemy.stats.initiative.total;
-
-  private setRound(
-    attacker: Player | Enemy,
-    defender: Player | Enemy,
-    playerAction: Skill,
-    counter: number
-  ) {
-    this.round = {
-      roundState: attacker.type === 'player' ?
-        RoundState.PlayerTurn :
-        RoundState.EnemyTurn,
-      playerAction: playerAction,
-      turn: {
-        counter: counter,
-        attacker: attacker,
-        defender: defender,
-        skill: attacker.type === 'player' ?
-          playerAction :
-          this.enemy.getAction(this.player)
-      }
-    }
-  }
-
+  // Initiates the round
+  // Triggered from the arena component when the user selects a skill to use
   startRound(skill: Skill) {
     if (this.speedCheck()) {
       this.setRound(this.player, this.enemy, skill, 1);
@@ -72,12 +56,44 @@ export class Battle {
     this.endTurn();
   }
 
-  private turn() {
-    if (this.round.turn.attacker.checkEffects()) {
-      this.handleSkill();
+  // Set the round details
+  private setRound(
+    attacker: Player | Enemy,
+    defender: Player | Enemy,
+    playerAction: Skill,
+    counter: number
+  ) {
+    const skill = attacker.type === 'player' ? playerAction : this.enemy.getAction(this.player);
+    this.round = {
+      playerAction: playerAction,
+      turn: {
+        counter: counter,
+        attacker: attacker,
+        defender: defender,
+        skill: skill,
+        action: {
+          plane: skill.plane,
+          attack: false,
+          hit: false,
+          attacks: [],
+          heals: [],
+          effects: []
+        }
+      }
     }
   }
 
+  // Process the effects of whichever skill is used for a turn
+  private turn() {
+    if (this.round.turn.attacker.checkEffects()) {
+      this.getEffects();
+      this.processEffects();
+      console.log(this.round);
+    }
+  }
+
+  // End of the turn
+  // Check the current state of both entities
   private endTurn() {
     if (!this.round.turn.defender.isAlive) {
       if (this.round.turn.defender.type === 'enemy') {
@@ -93,85 +109,145 @@ export class Battle {
     } 
   }
 
-  private handleSkill() {
-    let attack: Attack = {};
+  // Get data of every effect in the skill that was used
+  // Checks if the skill hits as well as getting damage values and setting the target
+  private getEffects() {
     this.round.turn.attacker.useSkill(this.round.turn.skill);
     this.round.turn.skill.effects.forEach(effect => {
       switch (effect.type) {
+
+        // Damage based effects
+        // Must check they hit and how much damage they cause
         case 'damage':
-          attack = this.attack(
+          const attack: EffectData = this.attack(
             this.round.turn.attacker,
             this.round.turn.defender,
             this.round.turn.skill.plane,
             effect
           );
+          
+          this.round.turn.action.attack = true;
+          if (attack.hitType !== 'miss') {
+            this.round.turn.action.hit = true;
+          }
+          
+          this.round.turn.action.attacks.push(attack);
           break;
 
+        // Heal based effects
         case 'heal':
-          if (attack.action !== 'miss') {
-            this.heal(this.round.turn.attacker, effect);
-          }
+          const heal: EffectData = this.heal(this.round.turn.attacker, effect);
+          this.round.turn.action.heals.push(heal);
           break;
 
+        // Incapacitation effects
         case 'incapacitate':
-          if (attack.action !== 'miss' && this.round.turn.attacker.effectHit(effect)) {
-            this.effect(this.round.turn.defender, effect, this.round.turn.skill);
-          }
+          const inc: EffectData = this.effect(
+            this.round.turn.attacker,
+            this.round.turn.defender,
+            effect
+          );
+          this.round.turn.action.effects.push(inc);
           break;
 
+        // Buff effects
         case 'buff':
-          if (attack.action !== 'miss' && this.round.turn.attacker.effectHit(effect)) {
-            this.effect(this.round.turn.attacker, effect, this.round.turn.skill);
-          }
+          const buff: EffectData = this.effect(
+            this.round.turn.attacker,
+            this.round.turn.attacker,
+            effect
+          );
+          this.round.turn.action.effects.push(buff);
           break;
 
+        // Debuff effects
         case 'debuff':
-          if (attack.action !== 'miss' && this.round.turn.attacker.effectHit(effect)) {
-            this.effect(this.round.turn.defender, effect, this.round.turn.skill);
-          }
+          const debuff: EffectData = this.effect(
+            this.round.turn.attacker,
+            this.round.turn.defender,
+            effect
+          );          
+          this.round.turn.action.effects.push(debuff);
           break;
       }
     });
   }
 
+  // Process all the effects that were retrieved
+  private processEffects() {
+    // Attacks
+    this.round.turn.action.attacks.forEach(attack => {
+      if (attack.hitType !== 'miss') {
+        attack.target.takeHit(attack.value);
+      }
+    });
+
+    // All other effects
+    if (!this.round.turn.action.attack || this.round.turn.action.hit) {
+
+      // Heals
+      this.round.turn.action.heals.forEach(heal => {
+        heal.target.heal(heal.value);
+      });
+
+      // Buffs, debuffs and incapacitation
+      this.round.turn.action.effects.forEach(effect => {
+        if (effect.hitType !== 'miss') {
+          if (effect.existing) {
+            effect.target.refreshEffect(effect.effect);
+          } else {
+            effect.target.addEffect(effect.effect)
+          }
+        }
+      });
+    }
+  }
+
+  // The below methods are for retrieving the relevant data from each type of skill
+  // Current types are - attack | heal | effect (includes incapacitation, buffs and debuffs)
   private attack(
-    attacker: Player | Enemy,
-    defender: Player | Enemy,
+    user: Player | Enemy,
+    target: Player | Enemy,
     plane: string,
     effect: SkillEffect
   ) {
-    let attack: Attack = {};
+    let attackData: EffectData = { target: target };
     if (plane === 'physical') {
-      if (attacker.checkHit()) {
-        attack.damage = defender.checkResistance(attacker.getDamage(effect), defender.stats.armour.total);
-        attack.action = 'hit';
-        if (attacker.checkCrit()) {
-          attack.damage *= 2;
-          attack.action = 'crit';
+      if (user.checkHit()) {
+        attackData.value = target.checkResistance(user.getDamage(effect), target.stats.armour.total);
+        attackData.hitType = 'hit';
+        if (user.checkCrit()) {
+          attackData.value *= 2;
+          attackData.hitType = 'crit';
         }
-        defender.takeHit(attack.damage);
       } else {
-        attack.action = 'miss';
+        attackData.hitType = 'miss';
       }
     } else if (plane === 'magical') {
-      attack.damage = defender.checkResistance(attacker.getDamage(effect), defender.stats.magicResistance.total);
-      defender.takeHit(attack.damage);
-      attack.action = 'hit';
+      attackData.value = target.checkResistance(user.getDamage(effect), target.stats.magicResistance.total);
+      attackData.hitType = 'hit';
     }
-    return attack;
+    return attackData;
   }
 
-  private heal(entity: Player | Enemy, effect: SkillEffect) {
-    entity.heal(effect.value);
+  private heal(target: Player | Enemy, effect: SkillEffect) {
+    return { target: target, value: effect.value }
   }
 
-  private effect(entity: Player | Enemy, effect: SkillEffect, skill: Skill) {
-    if (entity.effectActive(effect)) {
-      entity.refreshEffect(effect);
+  private effect(
+    user: Player | Enemy,
+    target: Player | Enemy,
+    effect: SkillEffect
+  ) {
+    let effectData: EffectData = { target: target, effect: effect };
+    if (user.effectHit(effect)) {
+      effectData.hitType = 'hit';
+      effectData.existing = target.effectActive(effect) ? true : false;
     } else {
-      // effect.name = skill.name;
-      effect.remaining = effect.duration;
-      entity.addEffect(effect);
+      effectData.hitType = 'miss';
     }
+    return effectData;
   }
+
+  private speedCheck = () => this.player.stats.initiative.total >= this.enemy.stats.initiative.total;
 }
