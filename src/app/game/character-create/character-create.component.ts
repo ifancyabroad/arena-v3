@@ -75,7 +75,7 @@ export class CharacterCreateComponent implements OnInit {
         this.selectedPortrait,
         this.selectedClass,
         this.currentStats[this.selectedClass.name],
-        this.skillsService.getSkillsFromArray(this.selectedClass.skills)
+        Utils.deepCopyFunction(this.skillsService.getSkillsFromArray(this.selectedClass.skills))
       );
       this.stateService.moveTo(GameStatus.Town);
     }

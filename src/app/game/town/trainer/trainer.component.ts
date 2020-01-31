@@ -62,7 +62,7 @@ export class TrainerComponent implements OnInit {
     } else if (!this.checkRequirements(skills)) {
       // this.storeLog = 'Sorry you do not meet the requirements for that';
     } else {
-      skills.forEach(skill => this.player.learnSkill(skill));
+      this.player.learnSkills(skills);
       this.selection.clear();
     }
   }

@@ -55,7 +55,7 @@ export class EnemiesService {
       enemy.name,
       enemy.portrait,
       enemy.stats,
-      this.skillsService.getSkillsFromArray(enemy.skills),
+      Utils.deepCopyFunction(this.skillsService.getSkillsFromArray(enemy.skills)),
       enemy.armour,
       enemy.magicResistance,
       enemy.expValue,

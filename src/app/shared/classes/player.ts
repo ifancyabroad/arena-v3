@@ -2,6 +2,7 @@ import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
 import { Stats, Class } from '../interfaces/class';
 import { Item } from '../interfaces/item';
+import Utils from '../utils';
 
 export class Player extends GameEntity {
   type = 'player';
@@ -71,9 +72,9 @@ export class Player extends GameEntity {
   }
 
   // Skills
-  learnSkill(skill: Skill): void {
-    this.gold -= skill.price;
-    this.skills.push(skill);
+  learnSkills(skills: Skill[]): void {
+    skills.forEach(skill => this.gold -= skill.price);
+    this.skills.push(...Utils.deepCopyFunction(skills));
   }
 
   forgetSkill(skill: Skill): void {
