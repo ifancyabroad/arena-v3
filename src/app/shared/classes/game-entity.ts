@@ -4,13 +4,13 @@ import { Skill, SkillEffect } from '../interfaces/skill';
 import { Stats } from '../interfaces/class';
 
 interface EntityStats {
-  readonly strength: EntityStat;
-  readonly dexterity: EntityStat;
-  readonly constitution: EntityStat;
-  readonly intelligence: EntityStat;
-  readonly initiative: EntityStat;
-  readonly armour: EntityStat;
-  readonly magicResistance: EntityStat;
+  readonly strength?: EntityStat;
+  readonly dexterity?: EntityStat;
+  readonly constitution?: EntityStat;
+  readonly intelligence?: EntityStat;
+  readonly initiative?: EntityStat;
+  readonly armour?: EntityStat;
+  readonly magicResistance?: EntityStat;
 }
 
 interface EntityStat {
@@ -176,7 +176,7 @@ export class GameEntity {
     Utils.roll(effect.min, effect.max)
   )
 
-  // Effects
+  // Effect management
   effectActive = (effect: SkillEffect): boolean => this.activeEffects.includes(effect);
   effectHit = (effect: SkillEffect): boolean => effect.accuracy >= Utils.roll(1, 100);
 
@@ -229,18 +229,19 @@ export class GameEntity {
     }
   }
 
-  // Get specific stat types
-  getStats(type?: string): Object {
-    let stats = {};
-    if (!type) {
-      stats = this.stats;
-    } else {
-      for (let stat of Object.keys(this.stats)) {
-        if (this.stats[stat].type === type) {
-          stats[stat] = this.stats[stat];
-        }
-      }
-    }
-    return stats;
+  // Getting and setting stat values
+  getBaseStats(): EntityStats  {
+    let baseStats: EntityStats = {};
+    Object.keys(this.stats).forEach(stat => baseStats[stat] = this.stats[stat].base);
+    return baseStats;
+  }
+
+  setBaseStats(newStats: Stats) {
+    Object.keys(this.stats).forEach(stat => this.stats[stat].base = newStats[stat]);
+  }
+
+  getDetailedStats(type?: string): EntityStat[] {
+    let stats = Object.values(this.stats);
+    return type ? stats.filter(stat => stat.type === type) : stats;
   };
 }

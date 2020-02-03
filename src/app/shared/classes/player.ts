@@ -48,12 +48,17 @@ export class Player extends GameEntity {
   }
 
   // Experience
-  experienceGain(xp: number): void {
+  addExperience(xp: number): void {
     const currentTier = this.levelTier;
     this.experience += xp;
     if (currentTier !== this.levelTier) {
       this.skillPoints += 1;
     }
+  }
+
+  // Gold
+  addGold(gold: number): void {
+    this.gold += gold;
   }
 
   // Purchase item

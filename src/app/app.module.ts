@@ -79,6 +79,7 @@ import { LevelupModalComponent } from './game/town/player/levelup-modal/levelup-
     MatTooltipModule
   ],
   providers: [],
+  entryComponents: [LevelupModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

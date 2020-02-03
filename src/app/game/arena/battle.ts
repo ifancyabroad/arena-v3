@@ -103,18 +103,15 @@ export class Battle {
   // Check the current state of both entities
   private turnChecks() {
     if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'enemy') {
-      this.player.removeEffects();
-      this.state = BattleState.Victory;
-      this.state$.next(this.state);
+      this.victory();
     } else if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'player') {
-      this.state = BattleState.Defeat;
-      this.state$.next(this.state);
+      this.defeat();
     } else if (this.round.turn.counter === 2) {
-      this.player.updateEffects();
-      this.enemy.updateEffects();
-      this.state = BattleState.Waiting;
-      this.state$.next(this.state);
+      this.endRound();
     }
+
+    // Emit current battle state
+    this.state$.next(this.state);
 
     // Log the turn to the combat log
     this.log(this.round.turn);
@@ -218,6 +215,26 @@ export class Battle {
         }
       });
     }
+  }
+
+  // Finishes the current round and waits for next player input
+  private endRound() {
+    this.player.updateEffects();
+    this.enemy.updateEffects();
+    this.state = BattleState.Waiting;
+  }
+
+  // Remove active effects and collect gold and xp
+  private victory() {
+    this.player.removeEffects();
+    this.player.addGold(this.enemy.goldValue);
+    this.player.addExperience(this.enemy.expValue);
+    this.state = BattleState.Victory;
+  }
+
+  // Open game over popup
+  private defeat() {
+    this.state = BattleState.Defeat;
   }
 
   // The below methods are for retrieving the relevant data from each type of skill

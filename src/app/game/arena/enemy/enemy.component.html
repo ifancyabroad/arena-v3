@@ -10,16 +10,16 @@
       <div class="enemy-details">
         <table class="full-width">
           <tbody>
-            <tr *ngFor="let stat of enemy.getStats('main') | keyvalue: originalOrder">
-              <td>{{ stat.value.name }}</td>
-              <td>{{ stat.value.base }}</td>
+            <tr *ngFor="let stat of enemy.getDetailedStats('main')">
+              <td>{{ stat.name }}</td>
+              <td>{{ stat.base }}</td>
               <td>
-                <ng-container *ngIf="stat.value.modifier > 0">+</ng-container>
-                <ng-container *ngIf="stat.value.modifier">{{ stat.value.modifier }}</ng-container>
+                <ng-container *ngIf="stat.modifier > 0">+</ng-container>
+                <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
               </td>
               <td>
-                <ng-container *ngIf="stat.value.battle > 0">+</ng-container>
-                <ng-container *ngIf="stat.value.battle">{{ stat.value.battle }}</ng-container>
+                <ng-container *ngIf="stat.battle > 0">+</ng-container>
+                <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
               </td>
             </tr>
           </tbody>
