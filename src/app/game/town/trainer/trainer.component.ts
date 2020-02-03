@@ -7,6 +7,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { Skill } from 'src/app/shared/interfaces/skill';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   selector: 'app-trainer',
@@ -25,7 +26,8 @@ export class TrainerComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    private skillsService: SkillsService
+    private skillsService: SkillsService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -58,9 +60,15 @@ export class TrainerComponent implements OnInit {
   // Purchase selected skill
   buySkills(skills: Skill[]) {
     if (!this.checkGold(skills)) {
-      // this.storeLog = 'You do not have enough gold for that';
+      this.modalService.openDialog(
+        'Not enough gold!', 
+        'You do not have enough gold to purchase these skills, please check and try again.'
+      );
     } else if (!this.checkRequirements(skills)) {
-      // this.storeLog = 'Sorry you do not meet the requirements for that';
+      this.modalService.openDialog(
+        'Requirements not met!', 
+        'You do not meet the level requirements for 1 or more of the skills selected, please check and try again.'
+      );
     } else {
       this.player.learnSkills(skills);
       this.selection.clear();

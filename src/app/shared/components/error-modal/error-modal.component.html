@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <mat-icon matListIcon>error</mat-icon>
+  <h1 mat-dialog-title>{{ data.errorTitle }}</h1>
+</div>
+<div mat-dialog-content>
+  <p>{{ data.errorContent }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Ok</button>
+</div>

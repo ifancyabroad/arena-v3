@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   selector: 'app-store',
@@ -25,7 +26,8 @@ export class StoreComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -60,9 +62,15 @@ export class StoreComponent implements OnInit {
   // Purchase selected item
   buyItem(items: Item[]) {
     if (!this.checkGold(items)) {
-      // this.storeLog = 'You do not have enough gold for that';
+      this.modalService.openDialog(
+        'Not enough gold!', 
+        'You do not have enough gold to purchase these items, please check and try again.'
+      );
     } else if (!this.checkRequirements(items)) {
-      // this.storeLog = 'Sorry you do not meet the requirements for that';
+      this.modalService.openDialog(
+        'Requirements not met!', 
+        'You do not meet the stat requirements for 1 or more of the items selected, please check and try again.'
+      );
     } else {
       items.forEach(item => this.player.buyItem(item));
       this.selection.clear();

@@ -34,6 +34,7 @@ import { TavernComponent } from './game/town/tavern/tavern.component';
 import { ArenaComponent } from './game/arena/arena.component';
 import { EnemyComponent } from './game/arena/enemy/enemy.component';
 import { CombatLogComponent } from './game/arena/combat-log/combat-log.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { CombatLogComponent } from './game/arena/combat-log/combat-log.component
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    SharedModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
