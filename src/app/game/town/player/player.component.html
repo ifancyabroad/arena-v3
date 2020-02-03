@@ -84,5 +84,8 @@
     </mat-list>
   </mat-card-content>
   <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="player.skillPoints <= 0" (click)="levelup()">
+      Level Up
+    </button>
   </mat-card-actions>
 </mat-card>

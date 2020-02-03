@@ -35,6 +35,7 @@ import { ArenaComponent } from './game/arena/arena.component';
 import { EnemyComponent } from './game/arena/enemy/enemy.component';
 import { CombatLogComponent } from './game/arena/combat-log/combat-log.component';
 import { SharedModule } from './shared/shared.module';
+import { LevelupModalComponent } from './game/town/player/levelup-modal/levelup-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SharedModule } from './shared/shared.module';
     TavernComponent,
     ArenaComponent,
     EnemyComponent,
-    CombatLogComponent
+    CombatLogComponent,
+    LevelupModalComponent
   ],
   imports: [
     BrowserModule,
