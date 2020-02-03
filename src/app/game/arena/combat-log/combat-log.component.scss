@@ -1,0 +1,24 @@
+.log-container {
+  display: flex;
+
+  .controls {
+    margin-right: 2rem;
+  }
+
+  .log {
+    flex-grow: 1;
+
+    .combat-log {
+      height: 100px;
+      margin-bottom: 0;
+      overflow: auto;
+      display: flex;
+      flex-direction: column-reverse;
+  
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+}

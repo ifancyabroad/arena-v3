@@ -1,12 +1,18 @@
 <mat-card>
-  <mat-card-title>Combat log</mat-card-title>
-  <mat-card-content>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="!battleOver"
-      (click)="return()">
-      Return
-    </button>
-  </mat-card-content>
+  <div class="log-container">
+    <div class="controls">
+      <mat-card-title>Combat log</mat-card-title>
+      <button mat-raised-button color="primary" [disabled]="!battleOver" (click)="return()">
+        Return
+      </button>
+    </div>
+
+    <div class="log">
+      <mat-card-content>
+        <div class="combat-log">
+          <p *ngFor="let line of log">{{ line }}</p>
+        </div>
+      </mat-card-content>
+    </div>
+  </div>
 </mat-card>

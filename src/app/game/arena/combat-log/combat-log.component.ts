@@ -8,6 +8,7 @@ import { StateService, GameStatus } from 'src/app/shared/services/state.service'
 })
 export class CombatLogComponent implements OnInit {
   @Input() battleOver = false;
+  @Input() log: string[] = [];
 
   constructor(private stateService: StateService) { }
 

@@ -1,7 +1,7 @@
 import { Player } from 'src/app/shared/classes/player';
 import { Enemy } from 'src/app/shared/classes/enemy';
 import { Skill, SkillEffect } from 'src/app/shared/interfaces/skill';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export enum BattleState {
   Waiting, Turn, Victory, Defeat
@@ -18,6 +18,7 @@ interface Turn {
   readonly defender: Player | Enemy;
   readonly skill: Skill;
   action: {
+    incapacitated: boolean;
     plane: string;
     attack: boolean;
     hit: boolean;
@@ -36,9 +37,11 @@ interface EffectData {
 }
 
 export class Battle {
-  state = new BehaviorSubject<BattleState>(BattleState.Waiting);
+  state = BattleState.Waiting;
+  state$ = new BehaviorSubject<BattleState>(BattleState.Waiting);
   round: Round;
-
+  combatLog: Subject<string> = new Subject<string>();
+  
   constructor(
     public player: Player,
     public enemy: Enemy
@@ -52,6 +55,7 @@ export class Battle {
     } else {
       this.setRound(this.enemy, this.player, skill, 1);
     }
+    this.state = BattleState.Turn;
     this.turn();
   }
 
@@ -71,6 +75,7 @@ export class Battle {
         defender: defender,
         skill: skill,
         action: {
+          incapacitated: false,
           plane: skill.plane,
           attack: false,
           hit: false,
@@ -87,6 +92,8 @@ export class Battle {
     if (this.round.turn.attacker.checkEffects()) {
       this.getEffects();
       this.processEffects();
+    } else {
+      this.round.turn.action.incapacitated = true;
     }
     console.log(this.round);
     this.turnChecks();
@@ -97,17 +104,26 @@ export class Battle {
   private turnChecks() {
     if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'enemy') {
       this.player.removeEffects();
-      this.state.next(BattleState.Victory);
+      this.state = BattleState.Victory;
+      this.state$.next(this.state);
     } else if (!this.round.turn.defender.isAlive && this.round.turn.defender.type === 'player') {
-      this.state.next(BattleState.Defeat);
+      this.state = BattleState.Defeat;
+      this.state$.next(this.state);
     } else if (this.round.turn.counter === 2) {
       this.player.updateEffects();
       this.enemy.updateEffects();
-      this.state.next(BattleState.Waiting);
-    } else {
+      this.state = BattleState.Waiting;
+      this.state$.next(this.state);
+    }
+
+    // Log the turn to the combat log
+    this.log(this.round.turn);
+
+    // Continue to slower entity turn
+    if (this.state === BattleState.Turn) {
       this.setRound(this.round.turn.defender, this.round.turn.attacker, this.round.playerAction, 2);
       this.turn();
-    } 
+    }
   }
 
   // Get data of every effect in the skill that was used
@@ -251,4 +267,63 @@ export class Battle {
   }
 
   private speedCheck = () => this.player.stats.initiative.total >= this.enemy.stats.initiative.total;
+
+  // Emit the combat log data
+  private log(turn: Turn) {
+
+    // Log ability use or incapacitated
+    if (turn.action.incapacitated) {
+      this.combatLog.next(`${turn.attacker.name} is incapacitated and unable to move.`);
+    } else {
+      this.combatLog.next(`${turn.attacker.name} uses ${turn.skill.name}.`);
+    }
+
+    // Log any attacks that were made
+    turn.action.attacks.forEach(attack => {
+      if (attack.hitType === 'miss') {
+        this.combatLog.next(`${turn.skill.name} misses.`);
+      } else {
+        this.combatLog.next(`${turn.skill.name} ${attack.hitType}s for ${attack.value} damage!`);
+      }
+    });
+
+    // Log any heals
+    turn.action.heals.forEach(heal => this.combatLog.next(`${turn.skill.name} heals for ${heal.value}.`));
+
+    // Log any other skill types
+    turn.action.effects.forEach(effect => {
+      if (effect.hitType !== 'miss') {
+        switch (effect.effect.type) {
+          case 'buff':
+            Object.keys(effect.effect.modifiers).forEach(stat => {
+              const value = effect.effect.modifiers[stat];
+              this.combatLog.next(`${effect.target.name}'s ${stat} is ${value >= 0 ? 'increased' : 'decreased'} by ${value}.`);
+            });
+            break;
+
+          case 'debuff':
+            Object.keys(effect.effect.modifiers).forEach(stat => {
+              const value = effect.effect.modifiers[stat];
+              this.combatLog.next(`${effect.target.name}'s ${stat} is ${value >= 0 ? 'increased' : 'decreased'} by ${value}.`);
+            });
+            break;
+
+          case 'incapacitate':
+            if (effect.hitType === 'hit') {
+              this.combatLog.next(`${effect.target.name} is successfully incapcitated.`);
+            }
+            break;
+        }
+      }
+    });
+
+    // Log victory or defeat
+    if (this.state === BattleState.Victory) {
+      this.combatLog.next(`${this.player.name} slays the ${this.enemy.name}!`);
+      this.combatLog.next(`${this.player.name} receives ${this.enemy.expValue} experience!`);
+      this.combatLog.next(`${this.player.name} is rewarded with ${this.enemy.goldValue} gold!`);
+    } else if (this.state === BattleState.Defeat) {
+      this.combatLog.next(`${this.player.name} has been slain.`);
+    }
+  }
 }
