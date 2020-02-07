@@ -5,6 +5,7 @@ import { GameStatus, StateService } from '../../shared/services/state.service';
 import { SkillsService } from '../../shared/services/skills.service';
 import Utils from '../../shared/utils';
 import { KeyValue } from '@angular/common';
+import { Skill } from 'src/app/shared/interfaces/skill';
 
 @Component({
   selector: 'app-character-create',
@@ -49,6 +50,10 @@ export class CharacterCreateComponent implements OnInit {
     if (this.portraits[currentIndex + direction]) {
       this.selectedPortrait = this.portraits[currentIndex + direction];
     }
+  }
+
+  getStartingSkills(): Skill[] {
+    return this.skillsService.getSkillsFromArray(this.selectedClass.skills);
   }
 
   rollStats(cl: Class, reroll?: boolean) {

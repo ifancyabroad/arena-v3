@@ -45,9 +45,9 @@
             <h3 class="mat-h3">Description</h3>
             <p class="mat-body">{{ selectedClass.description }}</p>  
           </div>
-          <mat-list *ngIf="skills">
+          <mat-list>
             <h3 class="mat-h3">Starting Skills</h3>
-            <mat-list-item *ngFor="let skill of getClassSkills(selectedClass)">
+            <mat-list-item *ngFor="let skill of getStartingSkills()">
               <h3 matLine>{{ skill.name | titlecase }}</h3>
               <p matLine>{{ skill.description }}</p>
             </mat-list-item>
