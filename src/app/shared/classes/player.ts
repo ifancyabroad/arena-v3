@@ -56,6 +56,12 @@ export class Player extends GameEntity {
     }
   }
 
+  levelup(stats: Stats, points: number) {
+    this.level += this.skillPoints - points;
+    this.skillPoints = points;
+    this.setBaseStats(stats);
+  }
+
   // Gold
   addGold(gold: number): void {
     this.gold += gold;

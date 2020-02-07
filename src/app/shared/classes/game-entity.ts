@@ -232,12 +232,20 @@ export class GameEntity {
   // Getting and setting stat values
   getBaseStats(): EntityStats  {
     let baseStats: EntityStats = {};
-    Object.keys(this.stats).forEach(stat => baseStats[stat] = this.stats[stat].base);
+    Object.keys(this.stats).forEach(stat => {
+      if (this.stats[stat].type === 'main') {
+        baseStats[stat] = this.stats[stat].base;
+      }
+    });
     return baseStats;
   }
 
   setBaseStats(newStats: Stats) {
-    Object.keys(this.stats).forEach(stat => this.stats[stat].base = newStats[stat]);
+    Object.keys(this.stats).forEach(stat => {
+      if (this.stats[stat].type === 'main') {
+        this.stats[stat].base = newStats[stat];
+      }
+    });
   }
 
   getDetailedStats(type?: string): EntityStat[] {

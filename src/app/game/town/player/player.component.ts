@@ -35,7 +35,7 @@ export class PlayerComponent implements OnInit {
   // Levelup if skill points available
   levelup(): void {
     const dialogRef = this.dialog.open(LevelupModalComponent, {
-      width: '400px',
+      width: '300px',
       data: { player: this.player }
     });
   }

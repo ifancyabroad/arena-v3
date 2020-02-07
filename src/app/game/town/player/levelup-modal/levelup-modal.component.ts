@@ -15,8 +15,9 @@ interface DialogData {
   styleUrls: ['./levelup-modal.component.scss']
 })
 export class LevelupModalComponent implements OnInit {
-  tempPoints: number;
   tempStats: Stats;
+  startingTotal: number;
+  startingPoints: number;
 
   constructor(
     public dialogRef: MatDialogRef<LevelupModalComponent>,
@@ -24,21 +25,22 @@ export class LevelupModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tempPoints = this.data.player.skillPoints;
     this.tempStats = Utils.deepCopyFunction(this.data.player.getBaseStats());
+    this.startingTotal = Object.values(this.tempStats).reduce((a: number, b: number) => a + b, 0);
+    this.startingPoints = this.data.player.skillPoints;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  updatePoints(event) {
-    console.log(event);
-    // this.tempPoints = Object.values(this.tempStats).reduce((a: number, b: number) => a + b, 0)
+  getPoints() {
+    const currentTotal = Object.values(this.tempStats).reduce((a: number, b: number) => a + b, 0);
+    return this.startingTotal - currentTotal + this.startingPoints;
   }
 
   levelup() {
-    this.data.player.setBaseStats(this.tempStats);
+    this.data.player.levelup(this.tempStats, this.getPoints());
     this.dialogRef.close();
     console.log(this.data.player);
   }

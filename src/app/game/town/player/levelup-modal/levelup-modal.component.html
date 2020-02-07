@@ -1,22 +1,20 @@
 <h1 mat-dialog-title>Level Up</h1>
+<p>Points remaining: {{ getPoints() }}</p>
 <form mat-dialog-content id="levelup" (ngSubmit)="levelup()">
-  <p>Points remaining: {{ tempPoints }}</p>
   <table class="full-width">
     <tbody>
       <tr *ngFor="let stat of tempStats | keyvalue: originalOrder">
         <td>
-          <label [for]="stat.key">{{ stat.key | titlecase }}</label>
-        </td>
-        <td>
           <mat-form-field>
+            <mat-label>{{ stat.key | titlecase }}</mat-label>
             <input 
               matInput
               [id]="stat.key"
               type="number"
               [name]="stat.key"
               [min]="data.player.baseStats[stat.key]"
-              [(ngModel)]="tempStats[stat.key]"
-              (change)="updatePoints($event)">
+              [max]="tempStats[stat.key] + getPoints()"
+              [(ngModel)]="tempStats[stat.key]">
           </mat-form-field>
         </td>
       </tr>
