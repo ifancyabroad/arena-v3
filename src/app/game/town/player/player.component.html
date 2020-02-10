@@ -56,7 +56,7 @@
       <mat-tab>
         <ng-template mat-tab-label>Inventory</ng-template>
         <div class="player-card-tab">
-          <mat-accordion>
+          <mat-accordion class="headers-align">
             <mat-expansion-panel *ngFor="let item of player.inventory | keyvalue">
               <mat-expansion-panel-header>
                 <mat-panel-title>{{ item.key | titlecase }}</mat-panel-title>
@@ -70,11 +70,14 @@
       <mat-tab>
         <ng-template mat-tab-label>Skills</ng-template>
         <div class="player-card-tab">
-          <mat-accordion>
-            <mat-expansion-panel *ngFor="let skill of player.skills">
+          <mat-accordion class="headers-align skills">
+            <mat-expansion-panel *ngFor="let skill of player.skills" hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>{{ skill.name }}</mat-panel-title>
-                <mat-panel-description *ngIf="skill.level">Level: {{ skill.level }}</mat-panel-description>
+                <mat-panel-description *ngIf="skill.level">
+                  Level: {{ skill.level }}
+                  <mat-icon (click)="removeSkill(skill)">clear</mat-icon>
+                </mat-panel-description>
               </mat-expansion-panel-header>    
               <p>{{ skill.description }}</p>
             </mat-expansion-panel>

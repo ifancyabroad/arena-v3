@@ -50,6 +50,20 @@
   }
 }
 
+.headers-align .mat-expansion-panel-header-title,
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align.skills .mat-expansion-panel-header-description {
+  flex-grow: 1;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
 .player-card-tab {
   padding: 1rem;
 }

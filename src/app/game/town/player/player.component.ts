@@ -32,6 +32,11 @@ export class PlayerComponent implements OnInit {
     this.skillUsed.emit(skill);
   }
 
+  // Remove a known skill
+  removeSkill(skill: Skill) {
+    this.player.forgetSkill(skill);
+  }
+
   // Levelup if skill points available
   levelup(): void {
     const dialogRef = this.dialog.open(LevelupModalComponent, {
