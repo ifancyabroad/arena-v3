@@ -227,6 +227,7 @@ export class Battle {
   // Remove active effects and collect gold and xp
   private victory() {
     this.player.removeEffects();
+    this.player.addKill();
     this.player.addGold(this.enemy.goldValue);
     this.player.addExperience(this.enemy.expValue);
     this.state = BattleState.Victory;
@@ -327,7 +328,7 @@ export class Battle {
 
           case 'incapacitate':
             if (effect.hitType === 'hit') {
-              this.combatLog.next(`${effect.target.name} is successfully incapcitated.`);
+              this.combatLog.next(`${effect.target.name} is successfully incapacitated.`);
             }
             break;
         }

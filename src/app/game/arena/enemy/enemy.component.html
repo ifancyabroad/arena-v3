@@ -8,15 +8,18 @@
     </div>
     <div class="enemy-card-content">
       <div class="enemy-details">
-        <table class="full-width">
+        <table class="stats-table full-width">
+          <thead>
+            <tr>
+              <th></th>
+              <th matTooltip="Base value" matTooltipPosition="above">B</th>
+              <th matTooltip="Fight modifiers" matTooltipPosition="above">F</th>
+            </tr>
+          </thead>
           <tbody>
             <tr *ngFor="let stat of enemy.getDetailedStats('main')">
-              <td>{{ stat.name }}</td>
+              <td>{{ stat.name.slice(0, 3) }}</td>
               <td>{{ stat.base }}</td>
-              <td>
-                <ng-container *ngIf="stat.modifier > 0">+</ng-container>
-                <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
-              </td>
               <td>
                 <ng-container *ngIf="stat.battle > 0">+</ng-container>
                 <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>

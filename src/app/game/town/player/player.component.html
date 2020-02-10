@@ -1,4 +1,16 @@
 <mat-card>
+  <table class="additional-info mat-small">
+    <tbody>
+      <tr>
+        <td>Gold: </td>
+        <td class="text-right">{{ player.gold }}</td>
+      </tr>
+      <tr>
+        <td>Kills: </td>
+        <td class="text-right">{{ player.kills }}</td>
+      </tr>
+    </tbody>
+  </table>
   <mat-card-title>{{ player.name }}</mat-card-title>
   <mat-card-subtitle>Level {{ player.level }} {{ player.cl.name }}</mat-card-subtitle>
   <mat-card-content>
@@ -12,16 +24,24 @@
         <img src="assets/img/portraits/{{ player.portrait }}" alt="Character portrait">
       </div>
       <div class="player-details">
-        <table class="full-width">
+        <table class="stats-table full-width">
+          <thead>
+            <tr>
+              <th></th>
+              <th matTooltip="Base value" matTooltipPosition="above">B</th>
+              <th matTooltip="Item modifiers" matTooltipPosition="above">I</th>
+              <th *ngIf="view === 'arena'" matTooltip="Fight modifiers" matTooltipPosition="above">F</th>
+            </tr>
+          </thead>
           <tbody>
             <tr *ngFor="let stat of player.getDetailedStats('main')">
-              <td>{{ stat.name }}</td>
+              <td>{{ stat.name.slice(0, 3) }}</td>
               <td>{{ stat.base }}</td>
               <td>
                 <ng-container *ngIf="stat.modifier > 0">+</ng-container>
                 <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
               </td>
-              <td>
+              <td *ngIf="view === 'arena'">
                 <ng-container *ngIf="stat.battle > 0">+</ng-container>
                 <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
               </td>

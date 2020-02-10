@@ -47,6 +47,11 @@ export class Player extends GameEntity {
     return this.levelingTier.filter(level => this.experience >= level['exp']).pop()['level'];
   }
 
+  // Kills
+  addKill() {
+    this.kills++;
+  }
+
   // Experience
   addExperience(xp: number): void {
     const currentTier = this.levelTier;
