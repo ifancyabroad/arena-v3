@@ -1,5 +1,5 @@
 <div class="main-container arena">
-  <div class="player-card">
+  <div class="player-card" [@flyInLeft]>
     <app-player
       [view]="'arena'"
       [waiting]="waiting"
@@ -7,7 +7,7 @@
     </app-player>
   </div>
 
-  <div class="arena-content">
+  <div class="arena-content" [@flyInRight]>
     <div class="enemy-card" *ngIf="enemy">
       <app-enemy [enemy]="enemy"></app-enemy>
     </div>

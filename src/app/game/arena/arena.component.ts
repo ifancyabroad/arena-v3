@@ -8,11 +8,37 @@ import { Battle, BattleState } from './battle';
 import { Subscription } from 'rxjs';
 import { GameOverModalComponent } from 'src/app/shared/components/game-over-modal/game-over-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { flyInAnimation, flyOutAnimation } from 'src/animations';
 
 @Component({
   selector: 'app-arena',
   templateUrl: './arena.component.html',
-  styleUrls: ['./arena.component.scss']
+  styleUrls: ['./arena.component.scss'],
+  animations: [
+    trigger('flyInLeft', [
+      transition('void => *', [
+        useAnimation(flyInAnimation, {
+          params: {
+            transform: 'translateX(-50%)',
+            opacity: 0,
+            time: '0.4s'
+          }
+        })
+      ])
+    ]),
+    trigger('flyInRight', [
+      transition('void => *', [
+        useAnimation(flyInAnimation, {
+          params: {
+            transform: 'translateX(50%)',
+            opacity: 0,
+            time: '0.4s'
+          }
+        })
+      ])
+    ])
+  ]
 })
 export class ArenaComponent implements OnInit, OnDestroy {
   battle: Battle;
