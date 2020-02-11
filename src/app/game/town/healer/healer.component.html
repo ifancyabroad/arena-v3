@@ -5,7 +5,8 @@
   </mat-card-header>
   <img mat-card-image src="assets/img/backgrounds/healer.jpg" alt="Church interior artwork">
   <mat-card-actions>
-    <button mat-raised-button color="primary">Action 1</button>
-    <button mat-raised-button color="warn">Action 2</button>
+    <button *ngFor="let heal of heals" mat-raised-button color="primary" (click)="healPlayer(heal)">
+      {{ heal.name }} - {{ heal.price }}g
+    </button>
   </mat-card-actions>
 </mat-card>

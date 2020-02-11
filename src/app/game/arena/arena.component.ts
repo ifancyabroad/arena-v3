@@ -33,7 +33,7 @@ export class ArenaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.player = this.playerService.player;
-    this.enemy = this.enemiesService.createEnemy(2);
+    this.enemy = this.enemiesService.createEnemy(this.player.kills);
 
     this.battle = new Battle(this.player, this.enemy);
     this.logSubscription = this.battle.combatLog.subscribe(event => this.log.unshift(event));

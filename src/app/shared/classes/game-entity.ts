@@ -166,7 +166,7 @@ export class GameEntity {
     skill.uses--;
   }
 
-  resetSkill(): void {
+  resetSkills(): void {
     this.skills.forEach(skill => skill.uses = skill.maxUses);
   }
 
