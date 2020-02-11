@@ -1,8 +1,27 @@
 [
   {
     "class": "basic",
-    "name": "Attack",
-    "description": "A regular melee attack.",
+    "name": "Bite",
+    "description": "A biting attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "basic",
+    "name": "Claw Swipe",
+    "description": "A swiping attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -19,6 +38,53 @@
     "level": 0
   },
   {
+    "class": "basic",
+    "name": "Punch",
+    "description": "A punching attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "basic",
+    "name": "Slime",
+    "description": "A slimy attack?",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.6,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "dexterity": -5,
+          "initiative": -5
+        },
+        "accuracy": 100,
+        "duration": 2
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
     "class": "warrior",
     "name": "Cleave",
     "description": "A powerful swing.",
@@ -28,13 +94,13 @@
       {
         "type": "damage",
         "modifier": "strength",
-        "multiplier": 1.2,
+        "multiplier": 1,
         "min": 1,
-        "max": 6
+        "max": 4
       }
     ],
     "price": 0,
-    "maxUses": 5,
+    "maxUses": 0,
     "level": 0
   },
   {
@@ -319,6 +385,25 @@
   },
   {
     "class": "rogue",
+    "name": "Jab",
+    "description": "A basic stabbing attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "initiative",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "rogue",
     "name": "Backstab",
     "description": "Sneak behind the enemy to strike them in the back.",
     "image": "",
@@ -332,9 +417,9 @@
         "max": 12
       }
     ],
-    "price": 0,
+    "price": 80,
     "maxUses": 1,
-    "level": 0
+    "level": 1
   },
   {
     "class": "rogue",
@@ -649,7 +734,7 @@
       }
     ],
     "price": 0,
-    "maxUses": 6,
+    "maxUses": 0,
     "level": 0
   },
   {

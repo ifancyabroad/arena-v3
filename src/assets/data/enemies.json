@@ -10,7 +10,7 @@
 			"initiative": 6
 		},
 		"skills": [
-			"Attack",
+			"Jab",
       "Quick Fingers",
       "Go For The Eyes"
 		],
@@ -31,7 +31,7 @@
 			"initiative": 6
 		},
 		"skills": [
-			"Attack",
+			"Bite",
       "Acrobatic Strike",
       "Agile Footwork"
 		],
@@ -51,7 +51,8 @@
 			"initiative": 7
 		},
 		"skills": [
-			"Attack",
+			"Bite",
+			"Lunging Strike",
 			"Takedown Attack"
 		],
 		"challenge": 0,
@@ -69,7 +70,7 @@
 			"initiative": 8
 		},
 		"skills": [
-			"Attack",
+			"Magic Arrow",
       "Colour Spray",
       "Magic Missiles",
       "Stone Skin",
@@ -91,7 +92,7 @@
 			"initiative": 6
 		},
 		"skills": [
-			"Attack",
+			"Jab",
 			"Backstab"
 		],
 		"challenge": 1,
@@ -110,7 +111,7 @@
 			"initiative": 10
 		},
 		"skills": [
-			"Attack",
+			"Punch",
 			"Gap In The Armour",
       "Press The Advantage"
 		],
@@ -131,7 +132,6 @@
 			"initiative": 7
 		},
 		"skills": [
-			"Attack",
 			"Cleave",
 			"Berserk",
       "Intimidating Shout"
@@ -153,7 +153,6 @@
 			"initiative": 4
 		},
 		"skills": [
-      "Attack",
       "Cleave",
 			"One-Two Punch",
 			"Brutal Advance"
@@ -174,7 +173,8 @@
 			"initiative": 4
 		},
 		"skills": [
-			"Attack",
+			"Bite",
+			"Claw Swipe",
 			"Takedown Attack",
 			"Lunging Strike",
 			"Berserk",
@@ -197,7 +197,7 @@
 			"initiative": 12
 		},
 		"skills": [
-			"Attack",
+			"Bite",
 			"Takedown Attack",
       "Lunging Strike",
       "Agile Footwork"
@@ -218,7 +218,6 @@
 			"initiative": 8
 		},
 		"skills": [
-      "Attack",
       "Magic Arrow",
 			"Magic Missiles",
       "Stone Skin",
@@ -242,7 +241,7 @@
 			"initiative": 9
 		},
 		"skills": [
-			"Attack",
+			"Jab",
 			"Precise Strike",
 			"Gap In The Armour",
 			"Dizzying Blow",
@@ -265,7 +264,7 @@
 			"initiative": 6
 		},
 		"skills": [
-      "Attack",
+      "Punch",
       "Crushing Blow",
 			"One-Two Punch",
 			"Berserk"
@@ -286,7 +285,7 @@
 			"initiative": 5
 		},
 		"skills": [
-			"Attack",
+			"Punch",
 			"Dizzying Blow",
 			"Brutal Advance"
 		],
@@ -307,7 +306,7 @@
 			"initiative": 10
 		},
 		"skills": [
-      "Attack",
+      "Magic Arrow",
       "Cripple",
 			"Lightning Bolt",
       "Chromatic Orb",
@@ -331,7 +330,7 @@
 			"initiative": 1
 		},
 		"skills": [
-			"Attack",
+			"Slime",
 			"Takedown Attack",
 			"Stand Ground"
 		],
@@ -352,7 +351,6 @@
 			"initiative": 7
 		},
 		"skills": [
-			"Attack",
 			"Cleave",
 			"Stand Ground",
       "Arm Breaker",
@@ -375,7 +373,7 @@
 			"initiative": 11
 		},
 		"skills": [
-			"Attack",
+			"Magic Arrow",
 			"Magic Missiles",
 			"Fireball",
 			"Lightning Bolt",
@@ -400,7 +398,7 @@
 			"initiative": 14
 		},
 		"skills": [
-			"Attack",
+			"Jab",
 			"Acrobatic Strike",
 			"Precise Strike",
 			"Agile Footwork",
@@ -426,7 +424,8 @@
 			"initiative": 16
 		},
 		"skills": [
-			"Attack",
+			"Bite",
+			"Claw Swipe",
 			"Whirlwind Strike",
 			"Acrobatic Strike",
 			"Shadow Strike",
@@ -450,7 +449,7 @@
 			"initiative": 12
 		},
 		"skills": [
-			"Attack",
+			"Jab",
 			"Lunging Strike",
 			"Acrobatic Strike",
 			"Gap In The Armour",
@@ -473,7 +472,7 @@
 			"initiative": 11
 		},
 		"skills": [
-			"Attack",
+			"Bite",
 			"Acrobatic Strike",
 			"Cloak Of Shadows",
       "Shadow Strike",
@@ -498,7 +497,7 @@
 			"initiative": 15
 		},
 		"skills": [
-			"Attack",
+			"Magic Arrow",
 			"Fireball",
 			"Chain Lightning",
 			"Paralyze",
@@ -522,7 +521,7 @@
 			"initiative": 15
 		},
 		"skills": [
-			"Attack",
+			"Magic Arrow",
 			"Chain Lightning",
 			"Iron Skin",
 			"Confusion",
@@ -546,7 +545,7 @@
 			"initiative": 8
 		},
 		"skills": [
-      "Attack",
+      "Punch",
       "Crushing Blow",
 			"Stand Ground",
 			"Brutal Advance",
@@ -569,7 +568,8 @@
 			"initiative": 15
 		},
 		"skills": [
-			"Attack",
+			"Bite",
+			"Magic Arrow",
 			"Lunging Strike",
 			"Takedown Attack",
 			"Whirlwind Strike",

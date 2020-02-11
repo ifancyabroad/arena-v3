@@ -5,7 +5,6 @@
     "image": "warrior.png",
     "trainer": "High Warlord",
     "skills": [
-      "Attack",
       "Cleave"
     ],
     "minStats": {
@@ -29,7 +28,6 @@
     "image": "mage.jpg",
     "trainer": "Arch Mage",
     "skills": [
-      "Attack",
       "Magic Arrow"
     ],
     "minStats": {
@@ -53,8 +51,7 @@
     "image": "rogue.jpg",
     "trainer": "Master Assassin",
     "skills": [
-      "Attack",
-      "Backstab"
+      "Jab"
     ],
     "minStats": {
       "strength": 7,
