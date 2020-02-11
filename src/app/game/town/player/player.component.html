@@ -37,11 +37,11 @@
             <tr *ngFor="let stat of player.getDetailedStats('main')">
               <td>{{ stat.name.slice(0, 3) }}</td>
               <td>{{ stat.base }}</td>
-              <td>
+              <td [ngClass]="{'text-primary': stat.modifier > 0, 'text-warn': stat.modifier < 0}">
                 <ng-container *ngIf="stat.modifier > 0">+</ng-container>
                 <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
               </td>
-              <td *ngIf="view === 'arena'">
+              <td [ngClass]="{'text-primary': stat.battle > 0, 'text-warn': stat.battle < 0}" *ngIf="view === 'arena'">
                 <ng-container *ngIf="stat.battle > 0">+</ng-container>
                 <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
               </td>

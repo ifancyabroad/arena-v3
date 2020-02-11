@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./variables";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.full-width {
-  width: 100%;
+.text-primary {
+  color: $primary;
 }
 
-.main-container {
-  margin: 2rem;
+.text-warn {
+  color: $warn;
 }
 
 .text-center {
@@ -21,6 +22,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .text-right {
   text-align: right;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.main-container {
+  margin: 2rem;
 }
 
 .stats-table {

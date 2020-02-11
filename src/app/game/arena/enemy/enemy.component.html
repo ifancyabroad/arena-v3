@@ -20,7 +20,7 @@
             <tr *ngFor="let stat of enemy.getDetailedStats()">
               <td>{{ stat.name.slice(0, 3) }}</td>
               <td>{{ stat.base }}</td>
-              <td>
+              <td [ngClass]="{'text-primary': stat.battle > 0, 'text-warn': stat.battle < 0}">
                 <ng-container *ngIf="stat.battle > 0">+</ng-container>
                 <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
               </td>
