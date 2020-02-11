@@ -66,7 +66,7 @@
           </button>  
         </div>
         <h3 class="mat-h3">Roll for your base statistics</h3>
-        <table class="full-width" *ngIf="selectedClass && currentStats[selectedClass.name]">
+        <table class="stats-table full-width" *ngIf="selectedClass && currentStats[selectedClass.name]">
           <tbody>
             <tr *ngFor="let stat of currentStats[selectedClass.name] | keyvalue: originalOrder">
               <td>{{ stat.key | titlecase }}</td>

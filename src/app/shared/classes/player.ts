@@ -2,6 +2,7 @@ import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
 import { Stats, Class } from '../interfaces/class';
 import { Item } from '../interfaces/item';
+import { LevelTier, RankTier } from '../config';
 import Utils from '../utils';
 
 export class Player extends GameEntity {
@@ -10,7 +11,6 @@ export class Player extends GameEntity {
   level = 1; // Start at level 1
   kills = 0; // Kills starts at 0;
   experience = 0; // Experience starts at 0
-  levelingTier: Array<Object>;
   skillPoints: number; // Skill points available for spending
   gold: number; // Gold starts at 0
   rerolls: number; // 10 initial rerolls allowed
@@ -35,7 +35,6 @@ export class Player extends GameEntity {
   ) {
     super(name, portrait, baseStats, skills);
 
-    this.levelingTier = this.config.levelTier;
     this.skillPoints = this.config.skillPoints;
     this.gold = this.config.gold;
     this.rerolls = this.config.rerolls;
@@ -43,8 +42,13 @@ export class Player extends GameEntity {
   }
 
   // Find what level the player has earned through exp
-  get levelTier(): number {
-    return this.levelingTier.filter(level => this.experience >= level['exp']).pop()['level'];
+  get levelTier(): LevelTier {
+    return this.config.levelTier.filter(level => this.experience >= level.exp).pop();
+  }
+
+  // Find out what rank the player currently is
+  get rankTier(): RankTier {
+    return this.config.rankTier.filter(rank => this.kills >= rank.kills).shift();
   }
 
   // Kills

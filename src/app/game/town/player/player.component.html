@@ -76,7 +76,9 @@
                 <mat-panel-title>{{ skill.name }}</mat-panel-title>
                 <mat-panel-description *ngIf="skill.level">
                   Level: {{ skill.level }}
-                  <mat-icon (click)="removeSkill(skill)">clear</mat-icon>
+                  <button mat-icon-button color="warn" (click)="removeSkill(skill)">
+                    <mat-icon>clear</mat-icon>
+                  </button>
                 </mat-panel-description>
               </mat-expansion-panel-header>    
               <p>{{ skill.description }}</p>

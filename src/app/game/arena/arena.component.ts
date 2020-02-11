@@ -6,6 +6,8 @@ import { PlayerService } from 'src/app/shared/services/player.service';
 import { Player } from 'src/app/shared/classes/player';
 import { Battle, BattleState } from './battle';
 import { Subscription } from 'rxjs';
+import { GameOverModalComponent } from 'src/app/shared/components/game-over-modal/game-over-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-arena',
@@ -25,7 +27,8 @@ export class ArenaComponent implements OnInit, OnDestroy {
 
   constructor(
     private playerService: PlayerService,
-    private enemiesService: EnemiesService
+    private enemiesService: EnemiesService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -37,11 +40,26 @@ export class ArenaComponent implements OnInit, OnDestroy {
     this.stateSubscription = this.battle.state$.subscribe(state => {
       this.waiting = state === BattleState.Waiting ? true : false;
       this.battleOver = state === BattleState.Victory ? true : false;
+
+      if (state === BattleState.Defeat) {
+        this.gameOver();
+      }
     });
   }
 
   roundStart(playerSkill: Skill) {
     this.battle.startRound(playerSkill);
+  }
+
+  gameOver() {
+    const dialogRef = this.dialog.open(GameOverModalComponent, {
+      disableClose: true,
+      width: '500px',
+      data: {
+        player: this.player,
+        enemy: this.enemy
+      }
+    });
   }
 
   ngOnDestroy() {

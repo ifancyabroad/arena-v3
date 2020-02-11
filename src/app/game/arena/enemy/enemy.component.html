@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let stat of enemy.getDetailedStats('main')">
+            <tr *ngFor="let stat of enemy.getDetailedStats()">
               <td>{{ stat.name.slice(0, 3) }}</td>
               <td>{{ stat.base }}</td>
               <td>

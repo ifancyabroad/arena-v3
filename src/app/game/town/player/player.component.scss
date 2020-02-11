@@ -55,6 +55,10 @@
   flex-basis: 0;
 }
 
+.headers-align .mat-expansion-panel-header-title {
+  align-items: center;
+}
+
 .headers-align.skills .mat-expansion-panel-header-description {
   flex-grow: 1;
 }

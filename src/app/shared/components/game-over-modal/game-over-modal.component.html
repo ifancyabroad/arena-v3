@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>You have died...</h1>
+<div mat-dialog-content>
+
+  <p>You reached level <strong>{{ data.player.level }}</strong> with total experience of <strong>{{ data.player.experience }}</strong>. After defeating <strong>{{ data.player.kills }}</strong> enemies you were eventually slain by a <strong>{{ data.enemy.name }}</strong>.</p>
+
+  <!--Rank-->
+  <table class="rank-table full-width">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Rank</th>
+        <th>Slain by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ data.player.rankTier.rank }}</td>
+        <td>{{ data.player.rankTier.name }}</td>
+        <td>{{ data.enemy.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button disabled>Submit score</button>
+  <button mat-button cdkFocusInitial (click)="restart()">Restart</button>
+</div>
