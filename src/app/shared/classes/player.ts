@@ -108,4 +108,8 @@ export class Player extends GameEntity {
   forgetSkill(skill: Skill): void {
     this.skills.splice(this.skills.indexOf(skill), 1);
   }
+
+  checkSkill(skill: Skill): boolean {
+    return this.skills.filter(sk => skill.name === sk.name).length > 0;
+  }
 }

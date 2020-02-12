@@ -40,14 +40,14 @@ export class TrainerComponent implements OnInit {
   }
 
   // Check the player has enough gold
-  checkGold(skills: Skill[]) {
+  checkGold(skills: Skill[]): boolean {
     let goldTotal = 0;
     skills.forEach(skill => goldTotal += skill.price);
     return this.player.gold >= goldTotal;
   }
 
   // Check if player meets the requirements
-  checkRequirements(skills: Skill[]) {
+  checkRequirements(skills: Skill[]): boolean {
     let requirementsMet = true;
     skills.forEach(skill => {
       if (skill.level > this.player.level) {
@@ -55,6 +55,22 @@ export class TrainerComponent implements OnInit {
       }
     });
     return requirementsMet;
+  }
+
+  // Check if the player already has any of the selected skills
+  checkKnownSkills(skills: Skill[]): boolean {
+    let skillsUnknown = true;
+    skills.forEach(skill => {
+      if (this.player.checkSkill(skill)) {
+        skillsUnknown = false;
+      }
+    });
+    return skillsUnknown;
+  }
+
+  // Check the player isn't going over the maximum amount of skills
+  checkMaxSkills(skills: Skill[]): boolean {
+    return this.player.skills.length + skills.length <= this.player.maxSkills;
   }
 
   // Purchase selected skill
@@ -68,6 +84,16 @@ export class TrainerComponent implements OnInit {
       this.modalService.openDialog(
         'Requirements not met!', 
         'You do not meet the level requirements for 1 or more of the skills selected, please check and try again.'
+      );
+    } else if (!this.checkKnownSkills(skills)) {
+      this.modalService.openDialog(
+        'Skill already known!', 
+        'You already know one or more of the selected skills, please check and try again.'
+      );
+    } else if (!this.checkMaxSkills(skills)) {
+      this.modalService.openDialog(
+        'Max skills reached!', 
+        `You can only learn a maximum of ${this.player.maxSkills} skills, please check and try again.`
       );
     } else {
       this.player.learnSkills(skills);
