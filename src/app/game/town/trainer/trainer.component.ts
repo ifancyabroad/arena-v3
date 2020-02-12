@@ -39,11 +39,16 @@ export class TrainerComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  // Check the player has enough gold
-  checkGold(skills: Skill[]): boolean {
+  // Get total price
+  getGoldTotal(skills: Skill[]): number {
     let goldTotal = 0;
     skills.forEach(skill => goldTotal += skill.price);
-    return this.player.gold >= goldTotal;
+    return goldTotal;
+  }
+
+  // Check the player has enough gold
+  checkGold(skills: Skill[]): boolean {
+    return this.player.gold >= this.getGoldTotal(skills);
   }
 
   // Check if player meets the requirements
@@ -76,28 +81,35 @@ export class TrainerComponent implements OnInit {
   // Purchase selected skill
   buySkills(skills: Skill[]) {
     if (!this.checkGold(skills)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Not enough gold!', 
         'You do not have enough gold to purchase these skills, please check and try again.'
       );
     } else if (!this.checkRequirements(skills)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Requirements not met!', 
         'You do not meet the level requirements for 1 or more of the skills selected, please check and try again.'
       );
     } else if (!this.checkKnownSkills(skills)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Skill already known!', 
         'You already know one or more of the selected skills, please check and try again.'
       );
     } else if (!this.checkMaxSkills(skills)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Max skills reached!', 
         `You can only learn a maximum of ${this.player.maxSkills} skills, please check and try again.`
       );
     } else {
-      this.player.learnSkills(skills);
-      this.selection.clear();
+      this.modalService.confirmDialog(
+        'Confirm',
+        `Are you sure you wish to buy ${skills.map(item => item.name).join(', ')} for ${this.getGoldTotal(skills)}g?`
+      ).subscribe(res => {
+        if (res) {
+          this.player.learnSkills(skills);
+          this.selection.clear();    
+        }
+      });
     }
   }
 

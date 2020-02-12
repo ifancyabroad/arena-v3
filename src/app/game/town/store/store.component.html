@@ -60,7 +60,7 @@
     <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="buyItem(selection.selected)">Buy</button>
-    <button mat-raised-button color="warn" (click)="selection.clear()">Reset</button>
+    <button mat-raised-button color="primary" [disabled]="selection.isEmpty()" (click)="buyItem(selection.selected)">Buy</button>
+    <button mat-raised-button color="warn" [disabled]="selection.isEmpty()" (click)="selection.clear()">Reset</button>
   </mat-card-actions>
 </mat-card>

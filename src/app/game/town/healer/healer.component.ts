@@ -35,7 +35,7 @@ export class HealerComponent implements OnInit {
   // Heal specified
   healPlayer(heal: Heal) {
     if (this.player.gold < heal.price) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Not enough gold!', 
         'You do not have enough gold to purchase these items, please check and try again.'
       );

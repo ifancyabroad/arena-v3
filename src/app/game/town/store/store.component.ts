@@ -39,11 +39,16 @@ export class StoreComponent implements OnInit {
     });
   }
 
-  // Check the player has enough gold
-  checkGold(items: Item[]) {
+  // Get total price
+  getGoldTotal(items: Item[]): number {
     let goldTotal = 0;
     items.forEach(item => goldTotal += item.price);
-    return this.player.gold >= goldTotal;
+    return goldTotal;
+  }
+
+  // Check the player has enough gold
+  checkGold(items: Item[]) {
+    return this.player.gold >= this.getGoldTotal(items);
   }
 
   // Check if player meets the requirements
@@ -62,18 +67,25 @@ export class StoreComponent implements OnInit {
   // Purchase selected item
   buyItem(items: Item[]) {
     if (!this.checkGold(items)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Not enough gold!', 
         'You do not have enough gold to purchase these items, please check and try again.'
       );
     } else if (!this.checkRequirements(items)) {
-      this.modalService.openDialog(
+      this.modalService.errorDialog(
         'Requirements not met!', 
         'You do not meet the stat requirements for 1 or more of the items selected, please check and try again.'
       );
     } else {
-      items.forEach(item => this.player.buyItem(item));
-      this.selection.clear();
+      this.modalService.confirmDialog(
+        'Confirm',
+        `Are you sure you wish to buy ${items.map(item => item.name).join(', ')} for ${this.getGoldTotal(items)}g?`
+      ).subscribe(res => {
+        if (res) {
+          items.forEach(item => this.player.buyItem(item));
+          this.selection.clear();
+        }
+      });
     }
   }
 

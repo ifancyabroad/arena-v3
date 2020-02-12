@@ -5,6 +5,7 @@ import { KeyValue } from '@angular/common';
 import { Skill } from 'src/app/shared/interfaces/skill';
 import { MatDialog } from '@angular/material/dialog';
 import { LevelupModalComponent } from './levelup-modal/levelup-modal.component';
+import { ModalService } from 'src/app/shared/services/modal.service';
 
 @Component({
   selector: 'app-player',
@@ -20,7 +21,8 @@ export class PlayerComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private modalService: ModalService
   ) { }
 
   ngOnInit() {
@@ -33,8 +35,16 @@ export class PlayerComponent implements OnInit {
   }
 
   // Remove a known skill
-  removeSkill(skill: Skill) {
-    this.player.forgetSkill(skill);
+  removeSkill(event: Event, skill: Skill) {
+    event.stopPropagation();
+    this.modalService.confirmDialog(
+      'Confirm',
+      `Are you sure you wish to remove the skill ${skill.name}?`
+    ).subscribe(res => {
+      if (res) {
+        this.player.forgetSkill(skill);
+      }
+    });
   }
 
   // Levelup if skill points available

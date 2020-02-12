@@ -5,15 +5,16 @@ import { ErrorModalComponent } from './components/error-modal/error-modal.compon
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { GameOverModalComponent } from './components/game-over-modal/game-over-modal.component';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [ErrorModalComponent, GameOverModalComponent],
+  declarations: [ErrorModalComponent, GameOverModalComponent, ConfirmModalComponent],
   imports: [
     CommonModule,
     MatDialogModule,
     MatButtonModule,
     MatIconModule
   ],
-  entryComponents: [ErrorModalComponent, GameOverModalComponent]
+  entryComponents: [ErrorModalComponent, GameOverModalComponent, ConfirmModalComponent]
 })
 export class SharedModule { }
