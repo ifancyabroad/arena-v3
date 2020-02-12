@@ -17,7 +17,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 export class StoreComponent implements OnInit {
   player: Player;
 
-  columnsToDisplay = ['name', 'effect', 'type', 'price', 'select'];
+  columnsToDisplay = ['name', 'effects', 'requirements', 'type', 'price', 'select'];
   dataSource: MatTableDataSource<Item>;
   selection = new SelectionModel<Item>(true, []);
 
