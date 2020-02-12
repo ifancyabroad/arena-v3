@@ -65,7 +65,7 @@ export class Player extends GameEntity {
     }
   }
 
-  levelup(stats: Stats, points: number) {
+  levelup(stats: Stats, points: number): void {
     this.level += this.skillPoints - points;
     this.skillPoints = points;
     this.setBaseStats(stats);
@@ -76,19 +76,27 @@ export class Player extends GameEntity {
     this.gold += gold;
   }
 
-  // Purchase item
-  buyItem(item: Item) {
+  // Items
+  buyItem(item: Item): void {
     this.gold -= item.price;
-    this.updateInventory(item);
+    if (this.inventory[item.type]) {
+      this.unequip(item.type);
+    }
+    this.equip(item);
   }
 
-  // Inventory management
-  updateInventory(item: Item): void {
-    if (this.inventory[item.type] && this.stats[this.inventory[item.type].modifier]) {
-      this.stats[this.inventory[item.type].modifier].modifier -= this.inventory[item.type].value;
-    }
+  equip(item: Item): void {
     this.inventory[item.type] = item;
-    this.stats[this.inventory[item.type].modifier].modifier += this.inventory[item.type].value;
+    Object.keys(this.inventory[item.type].modifiers).forEach(
+      stat => this.stats[stat].modifier += this.inventory[item.type].modifiers[stat]
+    );
+  }
+
+  unequip(type: string): void {
+    Object.keys(this.inventory[type].modifiers).forEach(
+      stat => this.stats[stat].modifier -= this.inventory[type].modifiers[stat]
+    );
+    this.inventory[type] = null;
   }
 
   // Skills

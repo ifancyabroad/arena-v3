@@ -17,7 +17,7 @@ export class Config {
   readonly critMultiplier = 0.75; // Multiply by dexterity to get crit chance
 
   readonly skillPoints = 0; // Skill points to start with
-  readonly gold = 0; // Gold the player starts with
+  readonly gold = 9999; // Gold the player starts with
   readonly rerolls = 10; // Number of rerolls allowed
   readonly maxSkills = 6; // Number of abilities allowed
 
