@@ -80,7 +80,7 @@
         <ng-template mat-tab-label>Inventory</ng-template>
         <div class="player-card-tab">
           <mat-accordion class="headers-align">
-            <mat-expansion-panel *ngFor="let item of player.inventory | keyvalue">
+            <mat-expansion-panel *ngFor="let item of player.inventory | keyvalue: originalOrder">
               <mat-expansion-panel-header>
                 <mat-panel-title>{{ item.key | titlecase }}</mat-panel-title>
                 <mat-panel-description>{{ item.value ? item.value.name : 'None' }}</mat-panel-description>

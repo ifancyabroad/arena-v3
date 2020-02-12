@@ -24,7 +24,7 @@ export class Enemy extends GameEntity {
   getAction(player: Player): Skill {
     let options: Skill[] = this.skills.filter(skill => !skill.maxUses || skill.uses > 0); // Filter out skills with 0 uses
 
-    options = this.getLowPriority(options, player);
+    options = this.getLowPriority(options, player).length ? this.getLowPriority(options, player) : options;
     options = this.getHighPriority(options).length ? this.getHighPriority(options) : options;
     options = this.getMidPriority(options, player).length ? this.getMidPriority(options, player) : options;
 
