@@ -2,7 +2,7 @@
   {
     "class": "basic",
     "name": "Bite",
-    "description": "A biting attack.",
+    "description": "A basic biting attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -21,7 +21,7 @@
   {
     "class": "basic",
     "name": "Claw Swipe",
-    "description": "A swiping attack.",
+    "description": "A basic swiping attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -40,7 +40,7 @@
   {
     "class": "basic",
     "name": "Punch",
-    "description": "A punching attack.",
+    "description": "A basic punching attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -106,7 +106,7 @@
   {
     "class": "warrior",
     "name": "Precise Strike",
-    "description": "Aim for the opponents weak spot.",
+    "description": "A precise, dexterity based attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -125,7 +125,7 @@
   {
     "class": "warrior",
     "name": "Intimidating Shout",
-    "description": "Roar at the enemy to demoralise them.",
+    "description": "Roar at the enemy to lower their initiative.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -145,7 +145,7 @@
   {
     "class": "warrior",
     "name": "Charge",
-    "description": "Charge at the enemy to catch them off guard.",
+    "description": "A charge attack that deals damage based on initiative.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -164,7 +164,7 @@
   {
     "class": "warrior",
     "name": "Brutal Advance",
-    "description": "Force the opponent back.",
+    "description": "Force the opponent back, lowering their dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -184,7 +184,7 @@
   {
     "class": "warrior",
     "name": "Lunging Strike",
-    "description": "Leap towards the enemy and strike them.",
+    "description": "Leap towards the enemy to land a powerful strike.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -203,7 +203,7 @@
   {
     "class": "warrior",
     "name": "Stand Ground",
-    "description": "Stand your ground to increase defense but reduce mobility.",
+    "description": "Stand your ground to greatly increase armour but reduce dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -224,7 +224,7 @@
   {
     "class": "warrior",
     "name": "Takedown Attack",
-    "description": "Charge the enemy, taking them down to the ground.",
+    "description": "Pin the enemy to the ground, incapacitating them.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -248,7 +248,7 @@
   {
     "class": "warrior",
     "name": "Dizzying Blow",
-    "description": "Aim for the opponents head, disorienting them.",
+    "description": "A powerful blow to the head with a chance to reduce intelligence.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -275,7 +275,7 @@
   {
     "class": "warrior",
     "name": "Berserk",
-    "description": "Become enraged, increasing attack but lowering defense.",
+    "description": "Become enraged, greatly increasing strength but lowering armour.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -315,7 +315,7 @@
   {
     "class": "warrior",
     "name": "Dancing Defense",
-    "description": "Greatly increase defense and mobility with rhythmic movement.",
+    "description": "Greatly increase armour and dexterity with rhythmic movement.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -336,7 +336,7 @@
   {
     "class": "warrior",
     "name": "Knockout",
-    "description": "Knock the opponent unconscious.",
+    "description": "Knock the opponent unconscious, incapacitating them.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -392,7 +392,7 @@
     "effects": [
       {
         "type": "damage",
-        "modifier": "initiative",
+        "modifier": "strength",
         "multiplier": 1,
         "min": 1,
         "max": 4
@@ -405,7 +405,7 @@
   {
     "class": "rogue",
     "name": "Backstab",
-    "description": "Sneak behind the enemy to strike them in the back.",
+    "description": "Sneak behind the enemy to strike them in the back, dealing damage based on initiative.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -424,7 +424,7 @@
   {
     "class": "rogue",
     "name": "Acrobatic Strike",
-    "description": "Use your mobility to strike from above.",
+    "description": "Use your dexterity to strike from above.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -443,7 +443,7 @@
   {
     "class": "rogue",
     "name": "Quick Fingers",
-    "description": "Increase hand speed, ready for attack.",
+    "description": "Increase initiative, readying for attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -463,7 +463,7 @@
   {
     "class": "rogue",
     "name": "One-Two Punch",
-    "description": "Attack once with each fist.",
+    "description": "Attack once with each fist with a chance to reduce dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -497,7 +497,7 @@
   {
     "class": "rogue",
     "name": "Go For The Eyes",
-    "description": "Aim for the opponents eyes.",
+    "description": "Aim for the opponents eyes with a chance to greatly reduce initiative.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -524,7 +524,7 @@
   {
     "class": "rogue",
     "name": "Agile Footwork",
-    "description": "Increase your mobility.",
+    "description": "Dance around to increase your dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -544,7 +544,7 @@
   {
     "class": "rogue",
     "name": "Press The Advantage",
-    "description": "Corner the opponent limiting their movement.",
+    "description": "Corner the opponent reducing their dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -564,7 +564,7 @@
   {
     "class": "rogue",
     "name": "Surprising Assault",
-    "description": "Launch a surprise attack.",
+    "description": "Launch a surprise attack based on initiative.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -583,7 +583,7 @@
   {
     "class": "rogue",
     "name": "Gap In The Armour",
-    "description": "Expose a weakness in the opponents armour.",
+    "description": "Expose a weakness in the opponents armour with a chance to reduce it if successful.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -610,7 +610,7 @@
   {
     "class": "rogue",
     "name": "Mocking Strike",
-    "description": "Extravagant attack to taunt the enemy.",
+    "description": "Extravagant attack to taunt the enemy and reduce their intelligence.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -637,7 +637,7 @@
   {
     "class": "rogue",
     "name": "Arm Breaker",
-    "description": "Swing at the opponents leg to cripple them.",
+    "description": "Swing at the opponents arm to cripple them, greatly reducing strength and dexterity.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -665,7 +665,7 @@
   {
     "class": "rogue",
     "name": "Cloak Of Shadows",
-    "description": "Use your cloak to protect from harmful magic.",
+    "description": "Use your cloak to increase magic resistance.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -685,7 +685,7 @@
   {
     "class": "rogue",
     "name": "Spring The Trap",
-    "description": "Trap your opponent to immobilise them.",
+    "description": "Trap your opponent to incapacitate them.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -702,7 +702,7 @@
   {
     "class": "rogue",
     "name": "Shadow Strike",
-    "description": "Strike from the shadows.",
+    "description": "Strike from the shadows for a deadly dexterity based attack.",
     "image": "",
     "plane": "physical",
     "effects": [
@@ -721,7 +721,7 @@
   {
     "class": "mage",
     "name": "Magic Arrow",
-    "description": "Conjure an arrow.",
+    "description": "Conjure a magical arrow.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -803,7 +803,7 @@
   {
     "class": "mage",
     "name": "Colour Spray",
-    "description": "Dazzle the enemy.",
+    "description": "Dazzle the enemy reducing their intelligence.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -830,7 +830,7 @@
   {
     "class": "mage",
     "name": "Minor Spell Protection",
-    "description": "Protect against basic magic.",
+    "description": "Create a shield to increase magic resistance.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -850,7 +850,7 @@
   {
     "class": "mage",
     "name": "Stone Skin",
-    "description": "Harden the skin to increase defense.",
+    "description": "Harden the skin to increase armour.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -909,7 +909,7 @@
   {
     "class": "mage",
     "name": "Confusion",
-    "description": "Confuse the enemy.",
+    "description": "Confuse the enemy to reduce their intelligence.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -948,7 +948,7 @@
   {
     "class": "mage",
     "name": "Major Spell Protection",
-    "description": "Protect against powerful magic.",
+    "description": "Create a shield to greatly increase magic resistance.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -968,7 +968,7 @@
   {
     "class": "mage",
     "name": "Pierce Magic",
-    "description": "Reduce the opponents magical defenses.",
+    "description": "Reduce the opponents magic resistance.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -988,7 +988,7 @@
   {
     "class": "mage",
     "name": "Blind",
-    "description": "Temporarily blind the opponent.",
+    "description": "Temporarily blind the opponent, greatly reducing initiative.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -1034,7 +1034,7 @@
   {
     "class": "mage",
     "name": "Iron Skin",
-    "description": "Harden the skin to greatly increase defense.",
+    "description": "Harden the skin to greatly increase armour.",
     "image": "",
     "plane": "magical",
     "effects": [
@@ -1074,7 +1074,7 @@
   {
     "class": "mage",
     "name": "Paralyze",
-    "description": "Target the opponent with paralysis.",
+    "description": "Target the opponent with paralysis to incapacitate them.",
     "image": "",
     "plane": "magical",
     "effects": [
