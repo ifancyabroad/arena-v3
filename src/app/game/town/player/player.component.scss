@@ -31,7 +31,7 @@
 .player-card-content {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 8px;
 
   .portrait-image {
     height: 200px;
@@ -47,6 +47,15 @@
   
   .player-details {
     flex-grow: 1;
+
+    .stats-table {
+      margin-bottom: 12px;
+    }
+
+    .additional-stats {
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }
 

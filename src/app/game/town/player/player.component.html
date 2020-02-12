@@ -48,6 +48,27 @@
             </tr>
           </tbody>
         </table>
+
+        <div class="additional-stats">
+          <img
+            src="assets/img/icons/armour.png"
+            alt="Armour"
+            [matTooltip]="'Armour: ' + player.stats.armour.total"
+            matTooltipPosition="above"
+            width="16">
+          <img
+            src="assets/img/icons/magicResistance.png"
+            alt="Magic Resistance"
+            [matTooltip]="'Magic Resistance: ' + player.stats.magicResistance.total"
+            matTooltipPosition="above"
+            width="16">
+          <img
+            src="assets/img/icons/crit-chance.png"
+            alt="Armour"
+            [matTooltip]="'Crit chance: ' + player.critChance + '%'"
+            matTooltipPosition="above"
+            width="16">
+        </div>
       </div>
     </div>
 
