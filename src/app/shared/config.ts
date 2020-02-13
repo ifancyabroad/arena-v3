@@ -1,3 +1,5 @@
+import { Class } from './interfaces/class';
+
 export interface LevelTier {
   readonly level: number;
   readonly exp: number;
@@ -10,8 +12,14 @@ export interface RankTier {
   readonly img: string;
 }
 
-export class Config {
+export interface StatData {
+  readonly key: string;
+  readonly name: string;
+  readonly description: string;
+  readonly type: string;
+}
 
+export class Config {
   readonly healthMultiplier = 10; // Multiply by constitution to get health
   readonly hitMultiplier = 5; // Multiply by dexterity to get hit chance
   readonly critMultiplier = 0.75; // Multiply by dexterity to get crit chance
@@ -67,5 +75,136 @@ export class Config {
     { rank: 18, kills: 2, name: 'Recruit', img: '' },
     { rank: 19, kills: 1, name: 'Maggot', img: '' },
     { rank: 20, kills: 0, name: 'Goblin Fodder', img: '' }
+  ];
+
+  // Classes
+  readonly classes: Class[] = [
+    {
+      name: 'Warrior',
+      description: 'Proud and honorable, specialising in brute strength. Primary stats are strength and constitution.',
+      image: 'warrior.png',
+      trainer: 'High Warlord',
+      skills: [
+        'Cleave'
+      ],
+      minStats: {
+        strength: 10,
+        dexterity: 8,
+        constitution: 10,
+        intelligence: 1,
+        initiative: 7
+      },
+      maxStats: {
+        strength: 15,
+        dexterity: 12,
+        constitution: 13,
+        intelligence: 6,
+        initiative: 10
+      }
+    },
+    {
+      name: 'Mage',
+      description: 'Trained in the arcane arts and proficient with all forms of magic. Primary stat is intelligence.',
+      image: 'mage.jpg',
+      trainer: 'Arch Mage',
+      skills: [
+        'Magic Arrow'
+      ],
+      minStats: {
+        strength: 1,
+        dexterity: 3,
+        constitution: 5,
+        intelligence: 12,
+        initiative: 7
+      },
+      maxStats: {
+        strength: 6,
+        dexterity: 9,
+        constitution: 8,
+        intelligence: 15,
+        initiative: 10
+      }
+    },
+    {
+      name: 'Rogue',
+      description: 'Unscrupulous and underhanded, strikes from the shadows. Primary stats are dexterity and initiative.',
+      image: 'rogue.jpg',
+      trainer: 'Master Assassin',
+      skills: [
+        'Jab'
+      ],
+      minStats: {
+        strength: 7,
+        dexterity: 11,
+        constitution: 7,
+        intelligence: 4,
+        initiative: 10
+      },
+      maxStats: {
+        strength: 10,
+        dexterity: 15,
+        constitution: 11,
+        intelligence: 8,
+        initiative: 14
+      }
+    }
+  ];
+
+  // Portraits
+  readonly portraits: string[] = [
+    'female-warrior.jpg',
+    'male-mage.jpg',
+    'female-mage.jpg',
+    'male-knight.jpg',
+    'female-knight.jpg',
+    'male-thief.png',
+    'female-thief.jpg',
+    'male-warrior.jpg'
+  ];
+
+  // Stats
+  readonly stats: StatData[] = [
+    {
+      key: 'strength',
+      name: 'Strength',
+      description: 'How much damage your physical attacks do.',
+      type: 'main'
+    },
+    {
+      key: 'dexterity',
+      name: 'Dexterity',
+      description: 'The chance your physical attacks hit and critical hit.',
+      type: 'main'
+    },
+    {
+      key: 'constitution',
+      name: 'Constitution',
+      description: 'Determines your maximum health.',
+      type: 'main'
+    },
+    {
+      key: 'intelligence',
+      name: 'Intelligence',
+      description: 'How much damage your magical attacks do.',
+      type: 'main'
+    },
+    {
+      key: 'initiative',
+      name: 'Initiative',
+      description: 'Determines who strikes first.',
+      type: 'main'
+    },
+    {
+      key: 'armour',
+      name: 'Armour',
+      description: 'Offers protection from physical attacks',
+      type: 'defense'
+    },
+    {
+      key: 'magicResistance',
+      name: 'Magic Resistance',
+      description: 'Offers protection from magical attacks',
+      type: 'defense'
+    }
   ];
 }

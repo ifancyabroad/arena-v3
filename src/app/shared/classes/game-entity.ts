@@ -1,7 +1,7 @@
-import Utils from '../utils';
 import { Config } from '../config';
 import { Skill, SkillEffect } from '../interfaces/skill';
-import { Stats } from '../interfaces/class';
+import { BaseStats, DefenseStats } from '../interfaces/class';
+import Utils from '../utils';
 
 interface EntityStats {
   readonly strength?: EntityStat;
@@ -33,93 +33,27 @@ export class GameEntity {
   constructor(
     public name: string,
     public portrait: string,
-    public baseStats: Stats,
+    public baseStats: BaseStats,
+    public defenseStats: DefenseStats,
     public skills: Skill[],
-    public armour = 0,
-    public magicResistance = 0
   ) {
     // All stats for entity
     // The 5 main stats are set using base stats received in the constructor
     // Defense stats are set separately as only enemies are initialised with these
-    this.stats = {
-      strength: {
-        name: 'Strength',
-        description: 'How much damage your physical attacks do.',
-        type: 'main',
-        base: baseStats.strength,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      dexterity: {
-        name: 'Dexterity',
-        description: 'The chance your physical attacks hit and critical hit.',
-        type: 'main',
-        base: baseStats.dexterity,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      constitution: {
-        name: 'Constitution',
-        description: 'Determines your maximum health.',
-        type: 'main',
-        base: baseStats.constitution,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      intelligence: {
-        name: 'Intelligence',
-        description: 'How much damage your magical attacks do.',
-        type: 'main',
-        base: baseStats.intelligence,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      initiative: {
-        name: 'Initiative',
-        description: 'Determines who strikes first.',
-        type: 'main',
-        base: baseStats.initiative,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      armour: {
-        name: 'Armour',
-        description: 'Offers protection from physical attacks',
-        type: 'defense',
-        base: armour,
-        modifier: 0,
-        battle: 0,
-        get total(): number {
-          return this.base + this.modifier + this.battle;
-        }
-      },
-      magicResistance: {
-        name: 'Magic Resistance',
-        description: 'Offers protection from magical attacks',
-        type: 'defense',
-        base: magicResistance,
+    this.stats = {};
+    this.config.stats.forEach(stat => {
+      this.stats[stat.key] = {
+        name: stat.name,
+        description: stat.description,
+        type: stat.type,
+        base: stat.type === 'main' ? baseStats[stat.key] : defenseStats[stat.key],
         modifier: 0,
         battle: 0,
         get total(): number {
           return this.base + this.modifier + this.battle;
         }
       }
-    };
+    });
 
     // Set the entities health to it's max health when initialised
     // Max health is accessed via a getter
@@ -240,7 +174,7 @@ export class GameEntity {
     return baseStats;
   }
 
-  setBaseStats(newStats: Stats) {
+  setBaseStats(newStats: BaseStats) {
     Object.keys(this.stats).forEach(stat => {
       if (this.stats[stat].type === 'main') {
         this.stats[stat].base = newStats[stat];

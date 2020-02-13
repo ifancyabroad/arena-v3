@@ -4,14 +4,19 @@ export interface Class {
   readonly image: string;
   readonly trainer: string;
   readonly skills: string[];
-  readonly minStats: Stats;
-  readonly maxStats: Stats;
+  readonly minStats: BaseStats;
+  readonly maxStats: BaseStats;
 }
 
-export interface Stats {
+export interface BaseStats {
   readonly strength: number;
   readonly dexterity: number;
   readonly constitution: number;
   readonly intelligence: number;
   readonly initiative: number;
+}
+
+export interface DefenseStats {
+  readonly armour: number;
+  readonly magicResistance: number;
 }

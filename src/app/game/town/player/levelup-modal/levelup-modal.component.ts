@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Player } from 'src/app/shared/classes/player';
-import { Stats } from 'src/app/shared/interfaces/class';
+import { BaseStats } from 'src/app/shared/interfaces/class';
 import Utils from '../../../../shared/utils';
 import { KeyValue } from '@angular/common';
 
@@ -15,7 +15,7 @@ interface DialogData {
   styleUrls: ['./levelup-modal.component.scss']
 })
 export class LevelupModalComponent implements OnInit {
-  tempStats: Stats;
+  tempStats: BaseStats;
   startingTotal: number;
   startingPoints: number;
 

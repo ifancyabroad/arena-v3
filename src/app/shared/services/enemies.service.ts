@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Stats } from '../interfaces/class';
+import { BaseStats, DefenseStats } from '../interfaces/class';
 import { of, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -10,11 +10,10 @@ import Utils from '../../shared/utils';
 export interface EnemyData {
   readonly name: string;
   readonly portrait: string;
-  readonly stats: Stats;
+  readonly stats: BaseStats;
+  readonly defense: DefenseStats;
   readonly skills: string[];
   readonly challenge: number;
-  readonly armour: number;
-  readonly magicResistance: number;
   readonly expValue: number;
   readonly goldValue: number;
 }
@@ -55,9 +54,8 @@ export class EnemiesService {
       enemy.name,
       enemy.portrait,
       enemy.stats,
+      enemy.defense,
       Utils.deepCopyFunction(this.skillsService.getSkillsFromArray(enemy.skills)),
-      enemy.armour,
-      enemy.magicResistance,
       enemy.expValue,
       enemy.goldValue
     );

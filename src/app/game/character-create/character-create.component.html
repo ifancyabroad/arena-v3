@@ -1,4 +1,4 @@
-<div class="main-container">
+<div class="main-container character-create">
   <mat-card>
     <mat-card-title>Who are you?</mat-card-title>
     <mat-card-subtitle>Use the below options to customise your character</mat-card-subtitle>
@@ -38,20 +38,14 @@
           </mat-radio-group>
         </div>
         <div class="selected-class" *ngIf="selectedClass">
-          <!-- <div class="class-image">
-            <img src="assets/img/classes/{{ selectedClass.image }}" alt="{{ selectedClass.name }}">
-          </div> -->
           <div class="class-detail">
             <h3 class="mat-h3">Description</h3>
             <p class="mat-body">{{ selectedClass.description }}</p>  
           </div>
-          <mat-list>
-            <h3 class="mat-h3">Starting Skills</h3>
-            <mat-list-item *ngFor="let skill of getStartingSkills()">
-              <h3 matLine>{{ skill.name | titlecase }}</h3>
-              <p matLine>{{ skill.description }}</p>
-            </mat-list-item>
-          </mat-list>
+          <div class="class-skill">
+            <h3 class="mat-h3">Starting Skill</h3>
+            <p class="mat-body" *ngFor="let skill of getStartingSkills()">{{ skill.name | titlecase }}: {{ skill.description }}</p>
+          </div>
         </div>
       </div>
 
@@ -68,9 +62,12 @@
         <h3 class="mat-h3">Roll for your base statistics</h3>
         <table class="stats-table full-width" *ngIf="selectedClass && currentStats[selectedClass.name]">
           <tbody>
-            <tr *ngFor="let stat of currentStats[selectedClass.name] | keyvalue: originalOrder">
-              <td>{{ stat.key | titlecase }}</td>
-              <td>{{ stat.value}}</td>
+            <tr *ngFor="let stat of stats">
+              <td>
+                <span class="mat-h3">{{ stat.name }}</span><br>
+                <span class="mat-small">{{ stat.description }}</span>
+              </td>
+              <td>{{ currentStats[selectedClass.name][stat.key] }}</td>
             </tr>
           </tbody>
         </table>
@@ -78,7 +75,7 @@
     </form>
   
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit" form="character-create">Enter</button>
+      <button mat-raised-button color="primary" type="submit" form="character-create">Confirm</button>
     </mat-card-actions>
   </mat-card>
 </div>

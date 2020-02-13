@@ -1,6 +1,6 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
-import { Stats } from '../interfaces/class';
+import { BaseStats, DefenseStats } from '../interfaces/class';
 import { Player } from './player';
 import Utils from '../utils';
 
@@ -10,14 +10,13 @@ export class Enemy extends GameEntity {
   constructor(
     public name: string,
     public portrait: string,
-    public baseStats: Stats,
+    public baseStats: BaseStats,
+    public defenseStats: DefenseStats,
     public skills: Skill[],
-    public armour = 0,
-    public magicResistance = 0,
     public expValue: number,
     public goldValue: number
   ) {
-    super(name, portrait, baseStats, skills, armour, magicResistance);
+    super(name, portrait, baseStats, defenseStats, skills);
   }
 
   // AI to get the enemies choice of action

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CharacterCreateService } from './character-create.service';
-import { Class, Stats } from '../../shared/interfaces/class';
+import { Class, BaseStats } from '../../shared/interfaces/class';
 import { GameStatus, StateService } from '../../shared/services/state.service';
 import { SkillsService } from '../../shared/services/skills.service';
-import Utils from '../../shared/utils';
-import { KeyValue } from '@angular/common';
 import { Skill } from 'src/app/shared/interfaces/skill';
+import { Config, StatData } from 'src/app/shared/config';
+import { PlayerService } from 'src/app/shared/services/player.service';
+import Utils from '../../shared/utils';
 
 @Component({
   selector: 'app-character-create',
@@ -20,29 +20,31 @@ export class CharacterCreateComponent implements OnInit {
   selectedPortrait: string;
   selectedClass: Class;
 
-  rerolls = 10;
+  rerolls: number;
+  stats: StatData[];
   currentStats: {
-    Warrior?: Stats,
-    Mage?: Stats,
-    Rogue?: Stats
+    Warrior?: BaseStats,
+    Mage?: BaseStats,
+    Rogue?: BaseStats
   } = {};
 
   constructor(
-    private characterCreateService: CharacterCreateService,
+    private config: Config,
+    private playerService: PlayerService,
     private skillsService: SkillsService,
     private stateService: StateService
   ) { }
 
   ngOnInit() {
-    this.characterCreateService.getPortraits().subscribe(portraits => {
-      this.portraits = portraits;
-      this.selectedPortrait = this.portraits[0];
-    });
-    this.characterCreateService.getClasses().subscribe(classes => {
-      this.classes = classes;
-      this.classes.forEach(cl => this.rollStats(cl));
-      this.selectedClass = this.classes[0];
-    });
+    this.rerolls = this.config.rerolls;
+    this.stats = this.config.stats.filter(stat => stat.type === 'main');
+
+    this.portraits = this.config.portraits;
+    this.selectedPortrait = this.portraits[0];
+
+    this.classes = this.config.classes;
+    this.classes.forEach(cl => this.rollStats(cl));
+    this.selectedClass = this.classes[0];
   }
 
   changePortrait(direction: number) {
@@ -75,11 +77,12 @@ export class CharacterCreateComponent implements OnInit {
 
   create() {
     if (this.checkValid()) {
-      this.characterCreateService.createCharacter(
+      this.playerService.createCharacter(
         this.name,
         this.selectedPortrait,
         this.selectedClass,
         this.currentStats[this.selectedClass.name],
+        { armour: 0, magicResistance: 0 },
         Utils.deepCopyFunction(this.skillsService.getSkillsFromArray(this.selectedClass.skills))
       );
       this.stateService.moveTo(GameStatus.Town);
@@ -88,10 +91,6 @@ export class CharacterCreateComponent implements OnInit {
 
   checkValid(): boolean {
     return !!(this.name && this.name.length);
-  }
-
-  originalOrder = (a: KeyValue<number,string>, b: KeyValue<number,string>): number => {
-    return 0;
   }
 
 }

@@ -29,7 +29,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .main-container {
-  margin: 2rem;
+  max-width: 1350px;
+  margin: 2rem auto;
 }
 
 .stats-table {

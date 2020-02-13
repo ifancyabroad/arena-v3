@@ -36,6 +36,7 @@ import { EnemyComponent } from './game/arena/enemy/enemy.component';
 import { CombatLogComponent } from './game/arena/combat-log/combat-log.component';
 import { SharedModule } from './shared/shared.module';
 import { LevelupModalComponent } from './game/town/player/levelup-modal/levelup-modal.component';
+import { Config } from './shared/config';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { LevelupModalComponent } from './game/town/player/levelup-modal/levelup-
     MatExpansionModule,
     MatTooltipModule
   ],
-  providers: [],
+  providers: [Config],
   entryComponents: [LevelupModalComponent],
   bootstrap: [AppComponent]
 })

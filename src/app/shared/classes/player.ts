@@ -1,6 +1,6 @@
 import { GameEntity } from './game-entity';
 import { Skill } from '../interfaces/skill';
-import { Stats, Class } from '../interfaces/class';
+import { BaseStats, Class, DefenseStats } from '../interfaces/class';
 import { Item } from '../interfaces/item';
 import { LevelTier, RankTier } from '../config';
 import Utils from '../utils';
@@ -30,10 +30,11 @@ export class Player extends GameEntity {
     public name: string,
     public portrait: string,
     public cl: Class,
-    public baseStats: Stats,
+    public baseStats: BaseStats,
+    public defenseStats: DefenseStats,
     public skills: Skill[]
   ) {
-    super(name, portrait, baseStats, skills);
+    super(name, portrait, baseStats, defenseStats, skills);
 
     this.skillPoints = this.config.skillPoints;
     this.gold = this.config.gold;
@@ -65,7 +66,7 @@ export class Player extends GameEntity {
     }
   }
 
-  levelup(stats: Stats, points: number): void {
+  levelup(stats: BaseStats, points: number): void {
     this.level += this.skillPoints - points;
     this.skillPoints = points;
     this.setBaseStats(stats);
