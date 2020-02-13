@@ -26,13 +26,14 @@
   display: flex;
 
   .enemy-details {
-    flex-grow: 1;
     margin-right: 2rem;
   }
-
+  
   .enemy-image {
+    flex-grow: 1;
     height: 540px;
     overflow: hidden;
+    text-align: center;
   
     img {
       max-height: 100%;
