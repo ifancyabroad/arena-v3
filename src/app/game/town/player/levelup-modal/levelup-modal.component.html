@@ -3,10 +3,10 @@
 <form mat-dialog-content id="levelup" (ngSubmit)="levelup()">
   <table class="full-width">
     <tbody>
-      <tr *ngFor="let stat of tempStats | keyvalue: originalOrder">
+      <tr *ngFor="let stat of stats">
         <td>
           <mat-form-field>
-            <mat-label>{{ stat.key | titlecase }}</mat-label>
+            <mat-label>{{ stat.name }}</mat-label>
             <input 
               matInput
               [id]="stat.key"
