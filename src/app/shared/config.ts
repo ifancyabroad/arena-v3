@@ -1,4 +1,5 @@
 import { Class } from './interfaces/class';
+import { Injectable } from "@angular/core";
 
 export interface LevelTier {
   readonly level: number;
@@ -19,6 +20,7 @@ export interface StatData {
   readonly type: string;
 }
 
+@Injectable()
 export class Config {
   readonly healthMultiplier = 10; // Multiply by constitution to get health
   readonly hitMultiplier = 5; // Multiply by dexterity to get hit chance
