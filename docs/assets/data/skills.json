@@ -1,0 +1,1139 @@
+[
+  {
+    "class": "basic",
+    "name": "Bite",
+    "description": "A basic biting attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "basic",
+    "name": "Claw Swipe",
+    "description": "A basic swiping attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "basic",
+    "name": "Punch",
+    "description": "A basic punching attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "basic",
+    "name": "Slime",
+    "description": "A slimy attack?",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.6,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "dexterity": -5,
+          "initiative": -5
+        },
+        "accuracy": 100,
+        "duration": 2
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "warrior",
+    "name": "Cleave",
+    "description": "A powerful swing.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "warrior",
+    "name": "Precise Strike",
+    "description": "A precise, dexterity based attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "dexterity",
+        "multiplier": 0.5,
+        "min": 10,
+        "max": 10
+      }
+    ],
+    "price": 90,
+    "maxUses": 15,
+    "level": 1
+  },
+  {
+    "class": "warrior",
+    "name": "Intimidating Shout",
+    "description": "Roar at the enemy to lower their initiative.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "initiative": -5
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 50,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "warrior",
+    "name": "Charge",
+    "description": "A charge attack that deals damage based on initiative.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "initiative",
+        "multiplier": 2,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 100,
+    "maxUses": 1,
+    "level": 1
+  },
+  {
+    "class": "warrior",
+    "name": "Brutal Advance",
+    "description": "Force the opponent back, lowering their dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "dexterity": -4
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 160,
+    "maxUses": 20,
+    "level": 2
+  },
+  {
+    "class": "warrior",
+    "name": "Lunging Strike",
+    "description": "Leap towards the enemy to land a powerful strike.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1.4,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 200,
+    "maxUses": 15,
+    "level": 2
+  },
+  {
+    "class": "warrior",
+    "name": "Stand Ground",
+    "description": "Stand your ground to greatly increase armour but reduce dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "armour": 6,
+          "dexterity": -2
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 170,
+    "maxUses": 20,
+    "level": 2
+  },
+  {
+    "class": "warrior",
+    "name": "Takedown Attack",
+    "description": "Pin the enemy to the ground, incapacitating them.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "incapacitate",
+        "accuracy": 100,
+        "duration": 1
+      }
+    ],
+    "price": 270,
+    "maxUses": 3,
+    "level": 3
+  },
+  {
+    "class": "warrior",
+    "name": "Dizzying Blow",
+    "description": "A powerful blow to the head with a chance to reduce intelligence.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1.2,
+        "min": 1,
+        "max": 6
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "intelligence": -6
+        },
+        "accuracy": 80,
+        "duration": 2
+      }
+    ],
+    "price": 300,
+    "maxUses": 15,
+    "level": 3
+  },
+  {
+    "class": "warrior",
+    "name": "Berserk",
+    "description": "Become enraged, greatly increasing strength but lowering armour.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "strength": 8,
+          "armour": -4
+        },
+        "accuracy": 100,
+        "duration": 6
+      }
+    ],
+    "price": 280,
+    "maxUses": 20,
+    "level": 3
+  },
+  {
+    "class": "warrior",
+    "name": "Crushing Blow",
+    "description": "Strike the enemy with huge force.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1.7,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 420,
+    "maxUses": 10,
+    "level": 4
+  },
+  {
+    "class": "warrior",
+    "name": "Dancing Defense",
+    "description": "Greatly increase armour and dexterity with rhythmic movement.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "armour": 6,
+          "dexterity": 9
+        },
+        "accuracy": 100,
+        "duration": 2
+      }
+    ],
+    "price": 480,
+    "maxUses": 10,
+    "level": 4
+  },
+  {
+    "class": "warrior",
+    "name": "Knockout",
+    "description": "Knock the opponent unconscious, incapacitating them.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "incapacitate",
+        "accuracy": 80,
+        "duration": 3
+      }
+    ],
+    "price": 560,
+    "maxUses": 2,
+    "level": 4
+  },
+  {
+    "class": "warrior",
+    "name": "Whirlwind Strike",
+    "description": "Attack three times in quick succession.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 850,
+    "maxUses": 2,
+    "level": 5
+  },
+  {
+    "class": "rogue",
+    "name": "Jab",
+    "description": "A basic stabbing attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "rogue",
+    "name": "Backstab",
+    "description": "Sneak behind the enemy to strike them in the back, dealing damage based on initiative.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "initiative",
+        "multiplier": 2,
+        "min": 1,
+        "max": 12
+      }
+    ],
+    "price": 80,
+    "maxUses": 1,
+    "level": 1
+  },
+  {
+    "class": "rogue",
+    "name": "Acrobatic Strike",
+    "description": "Use your dexterity to strike from above.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "dexterity",
+        "multiplier": 1,
+        "min": 1,
+        "max": 12
+      }
+    ],
+    "price": 120,
+    "maxUses": 15,
+    "level": 1
+  },
+  {
+    "class": "rogue",
+    "name": "Quick Fingers",
+    "description": "Increase initiative, readying for attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "initiative": 5
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 80,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "rogue",
+    "name": "One-Two Punch",
+    "description": "Attack once with each fist with a chance to reduce dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "dexterity": -3
+        },
+        "accuracy": 80,
+        "duration": 2
+      }
+    ],
+    "price": 50,
+    "maxUses": 40,
+    "level": 1
+  },
+  {
+    "class": "rogue",
+    "name": "Go For The Eyes",
+    "description": "Aim for the opponents eyes with a chance to greatly reduce initiative.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.8,
+        "min": 1,
+        "max": 6
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "initiative": -8
+        },
+        "accuracy": 50,
+        "duration": 3
+      }
+    ],
+    "price": 140,
+    "maxUses": 20,
+    "level": 2
+  },
+  {
+    "class": "rogue",
+    "name": "Agile Footwork",
+    "description": "Dance around to increase your dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "dexterity": 4
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 200,
+    "maxUses": 30,
+    "level": 2
+  },
+  {
+    "class": "rogue",
+    "name": "Press The Advantage",
+    "description": "Corner the opponent reducing their dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "dexterity": -4
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 180,
+    "maxUses": 30,
+    "level": 2
+  },
+  {
+    "class": "rogue",
+    "name": "Surprising Assault",
+    "description": "Launch a surprise attack based on initiative.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "initiative",
+        "multiplier": 1.4,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 300,
+    "maxUses": 10,
+    "level": 3
+  },
+  {
+    "class": "rogue",
+    "name": "Gap In The Armour",
+    "description": "Expose a weakness in the opponents armour with a chance to reduce it if successful.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 0.5,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "armour": -8
+        },
+        "accuracy": 60,
+        "duration": 2
+      }
+    ],
+    "price": 280,
+    "maxUses": 15,
+    "level": 3
+  },
+  {
+    "class": "rogue",
+    "name": "Mocking Strike",
+    "description": "Extravagant attack to taunt the enemy and reduce their intelligence.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1,
+        "min": 1,
+        "max": 6
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "intelligence": -5
+        },
+        "accuracy": 90,
+        "duration": 4
+      }
+    ],
+    "price": 300,
+    "maxUses": 15,
+    "level": 3
+  },
+  {
+    "class": "rogue",
+    "name": "Arm Breaker",
+    "description": "Swing at the opponents arm to cripple them, greatly reducing strength and dexterity.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "strength",
+        "multiplier": 1.2,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "strength": -6,
+          "dexterity": -6
+        },
+        "accuracy": 50,
+        "duration": 4
+      }
+    ],
+    "price": 500,
+    "maxUses": 2,
+    "level": 4
+  },
+  {
+    "class": "rogue",
+    "name": "Cloak Of Shadows",
+    "description": "Use your cloak to increase magic resistance.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "magicResistance": 6
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 480,
+    "maxUses": 20,
+    "level": 4
+  },
+  {
+    "class": "rogue",
+    "name": "Spring The Trap",
+    "description": "Trap your opponent to incapacitate them.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "incapacitate",
+        "accuracy": 70,
+        "duration": 3
+      }
+    ],
+    "price": 550,
+    "maxUses": 2,
+    "level": 4
+  },
+  {
+    "class": "rogue",
+    "name": "Shadow Strike",
+    "description": "Strike from the shadows for a deadly dexterity based attack.",
+    "image": "",
+    "plane": "physical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "dexterity",
+        "multiplier": 1.8,
+        "min": 10,
+        "max": 10
+      }
+    ],
+    "price": 750,
+    "maxUses": 5,
+    "level": 5
+  },
+  {
+    "class": "mage",
+    "name": "Magic Arrow",
+    "description": "Conjure a magical arrow.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 0,
+    "maxUses": 0,
+    "level": 0
+  },
+  {
+    "class": "mage",
+    "name": "Magic Missiles",
+    "description": "Conjure three small projectiles.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 0.3,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 0.3,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 0.3,
+        "min": 1,
+        "max": 4
+      }
+    ],
+    "price": 100,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "mage",
+    "name": "Chromatic Orb",
+    "description": "Conjure a magical orb to potentially weaken the enemy.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1,
+        "min": 1,
+        "max": 4
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "strength": -2,
+          "dexterity": -2,
+          "intelligence": -2,
+          "initiative": -2
+        },
+        "accuracy": 80,
+        "duration": 4
+      }
+    ],
+    "price": 50,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "mage",
+    "name": "Colour Spray",
+    "description": "Dazzle the enemy reducing their intelligence.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 0.4,
+        "min": 1,
+        "max": 6
+      },
+      {
+        "type": "debuff",
+        "modifiers": {
+          "intelligence": -4
+        },
+        "accuracy": 50,
+        "duration": 3
+      }
+    ],
+    "price": 60,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "mage",
+    "name": "Minor Spell Protection",
+    "description": "Create a shield to increase magic resistance.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "magicResistance": 4
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 50,
+    "maxUses": 30,
+    "level": 1
+  },
+  {
+    "class": "mage",
+    "name": "Stone Skin",
+    "description": "Harden the skin to increase armour.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "armour": 4
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 150,
+    "maxUses": 30,
+    "level": 2
+  },
+  {
+    "class": "mage",
+    "name": "Lightning Bolt",
+    "description": "Conjure a lightning bolt.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1.2,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 180,
+    "maxUses": 20,
+    "level": 2
+  },
+  {
+    "class": "mage",
+    "name": "Destroy Armour",
+    "description": "Deteriorate opponents armour.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "armour": -5
+        },
+        "accuracy": 100,
+        "duration": 3
+      }
+    ],
+    "price": 190,
+    "maxUses": 30,
+    "level": 2
+  },
+  {
+    "class": "mage",
+    "name": "Confusion",
+    "description": "Confuse the enemy to reduce their intelligence.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "intelligence": -4
+        },
+        "accuracy": 100,
+        "duration": 3
+      }
+    ],
+    "price": 220,
+    "maxUses": 30,
+    "level": 2
+  },
+  {
+    "class": "mage",
+    "name": "Fireball",
+    "description": "Conjure a ball of fire.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1.4,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 280,
+    "maxUses": 15,
+    "level": 3
+  },
+  {
+    "class": "mage",
+    "name": "Major Spell Protection",
+    "description": "Create a shield to greatly increase magic resistance.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "magicResistance": 6
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 250,
+    "maxUses": 20,
+    "level": 3
+  },
+  {
+    "class": "mage",
+    "name": "Pierce Magic",
+    "description": "Reduce the opponents magic resistance.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "magicResistance": -5
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 320,
+    "maxUses": 30,
+    "level": 3
+  },
+  {
+    "class": "mage",
+    "name": "Blind",
+    "description": "Temporarily blind the opponent, greatly reducing initiative.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "initiative": -9
+        },
+        "accuracy": 80,
+        "duration": 3
+      }
+    ],
+    "price": 250,
+    "maxUses": 20,
+    "level": 3
+  },
+  {
+    "class": "mage",
+    "name": "Chain Lightning",
+    "description": "Conjure a lightning bolt that strikes twice.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1.2,
+        "min": 1,
+        "max": 6
+      },
+      {
+        "type": "damage",
+        "modifier": "intelligence",
+        "multiplier": 1.2,
+        "min": 1,
+        "max": 6
+      }
+    ],
+    "price": 550,
+    "maxUses": 10,
+    "level": 4
+  },
+  {
+    "class": "mage",
+    "name": "Iron Skin",
+    "description": "Harden the skin to greatly increase armour.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "buff",
+        "modifiers": {
+          "armour": 6
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 450,
+    "maxUses": 20,
+    "level": 4
+  },
+  {
+    "class": "mage",
+    "name": "Cripple",
+    "description": "Reduce enemies physical strength.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "debuff",
+        "modifiers": {
+          "strength": -6
+        },
+        "accuracy": 100,
+        "duration": 4
+      }
+    ],
+    "price": 480,
+    "maxUses": 20,
+    "level": 4
+  },
+  {
+    "class": "mage",
+    "name": "Paralyze",
+    "description": "Target the opponent with paralysis to incapacitate them.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "incapacitate",
+        "accuracy": 80,
+        "duration": 3
+      }
+    ],
+    "price": 600,
+    "maxUses": 2,
+    "level": 5
+  },
+  {
+    "class": "cleric",
+    "name": "Cure Minor Wounds",
+    "description": "Heal basic injuries.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "heal",
+        "value": 30
+      }
+    ],
+    "price": 0,
+    "maxUses": 2,
+    "level": 1
+  },
+  {
+    "class": "cleric",
+    "name": "Cure Major Wounds",
+    "description": "Heal moderate injuries.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "heal",
+        "value": 60
+      }
+    ],
+    "price": 0,
+    "maxUses": 2,
+    "level": 3
+  },
+  {
+    "class": "cleric",
+    "name": "Cure Critical Wounds",
+    "description": "Heal critical injuries.",
+    "image": "",
+    "plane": "magical",
+    "effects": [
+      {
+        "type": "heal",
+        "value": 90
+      }
+    ],
+    "price": 0,
+    "maxUses": 2,
+    "level": 5
+  }
+]
