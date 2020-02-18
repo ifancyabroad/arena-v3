@@ -19,97 +19,99 @@
         <h4 class="mat-h4">{{ player.health }} / {{ player.maxHealth }}</h4>
       </div>
     </div>
-    <div class="player-card-content">
-      <div class="portrait-image">
-        <img src="assets/img/portraits/{{ player.portrait }}" alt="Character portrait">
-      </div>
-      <div class="player-details">
-        <table class="stats-table full-width">
-          <thead>
-            <tr>
-              <th></th>
-              <th matTooltip="Base value" matTooltipPosition="above">B</th>
-              <th matTooltip="Item modifiers" matTooltipPosition="above">I</th>
-              <th *ngIf="view === 'arena'" matTooltip="Fight modifiers" matTooltipPosition="above">F</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let stat of player.getDetailedStats('main')">
-              <td>{{ stat.name.slice(0, 3) }}</td>
-              <td>{{ stat.base }}</td>
-              <td [ngClass]="{'text-primary': stat.modifier > 0, 'text-warn': stat.modifier < 0}">
-                <ng-container *ngIf="stat.modifier > 0">+</ng-container>
-                <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
-              </td>
-              <td [ngClass]="{'text-primary': stat.battle > 0, 'text-warn': stat.battle < 0}" *ngIf="view === 'arena'">
-                <ng-container *ngIf="stat.battle > 0">+</ng-container>
-                <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="additional-stats">
-          <img
-            src="assets/img/icons/armour.png"
-            alt="Armour"
-            [matTooltip]="'Armour: ' + player.stats.armour.total"
-            matTooltipPosition="above"
-            width="16">
-          <img
-            src="assets/img/icons/magicResistance.png"
-            alt="Magic Resistance"
-            [matTooltip]="'Magic Resistance: ' + player.stats.magicResistance.total"
-            matTooltipPosition="above"
-            width="16">
-          <img
-            src="assets/img/icons/crit-chance.png"
-            alt="Armour"
-            [matTooltip]="'Crit chance: ' + player.critChance + '%'"
-            matTooltipPosition="above"
-            width="16">
+    <div *ngIf="showDetails">
+      <div class="player-card-content">
+        <div class="portrait-image">
+          <img src="assets/img/portraits/{{ player.portrait }}" alt="Character portrait">
+        </div>
+        <div class="player-details">
+          <table class="stats-table full-width">
+            <thead>
+              <tr>
+                <th></th>
+                <th matTooltip="Base value" matTooltipPosition="above">B</th>
+                <th matTooltip="Item modifiers" matTooltipPosition="above">I</th>
+                <th *ngIf="view === 'arena'" matTooltip="Fight modifiers" matTooltipPosition="above">F</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let stat of player.getDetailedStats('main')">
+                <td>{{ stat.name.slice(0, 3) }}</td>
+                <td>{{ stat.base }}</td>
+                <td [ngClass]="{'text-primary': stat.modifier > 0, 'text-warn': stat.modifier < 0}">
+                  <ng-container *ngIf="stat.modifier > 0">+</ng-container>
+                  <ng-container *ngIf="stat.modifier">{{ stat.modifier }}</ng-container>
+                </td>
+                <td [ngClass]="{'text-primary': stat.battle > 0, 'text-warn': stat.battle < 0}" *ngIf="view === 'arena'">
+                  <ng-container *ngIf="stat.battle > 0">+</ng-container>
+                  <ng-container *ngIf="stat.battle">{{ stat.battle }}</ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <div class="additional-stats">
+            <img
+              src="assets/img/icons/armour.png"
+              alt="Armour"
+              [matTooltip]="'Armour: ' + player.stats.armour.total"
+              matTooltipPosition="above"
+              width="16">
+            <img
+              src="assets/img/icons/magicResistance.png"
+              alt="Magic Resistance"
+              [matTooltip]="'Magic Resistance: ' + player.stats.magicResistance.total"
+              matTooltipPosition="above"
+              width="16">
+            <img
+              src="assets/img/icons/crit-chance.png"
+              alt="Armour"
+              [matTooltip]="'Crit chance: ' + player.critChance + '%'"
+              matTooltipPosition="above"
+              width="16">
+          </div>
         </div>
       </div>
+  
+      <mat-divider></mat-divider>
+  
+      <!--Town View-->
+      <mat-tab-group mat-stretch-tabs *ngIf="view === 'town'">
+        <mat-tab>
+          <ng-template mat-tab-label>Inventory</ng-template>
+          <div class="player-card-tab">
+            <mat-accordion class="headers-align">
+              <mat-expansion-panel *ngFor="let item of player.inventory | keyvalue: originalOrder">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ item.key | titlecase }}</mat-panel-title>
+                  <mat-panel-description>{{ item.value ? item.value.name : 'None' }}</mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>{{ item.value ? item.value.description : 'Nothing equipped' }}</p>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>Skills</ng-template>
+          <div class="player-card-tab">
+            <mat-accordion class="headers-align skills">
+              <mat-expansion-panel *ngFor="let skill of player.skills" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>{{ skill.name }}</mat-panel-title>
+                  <mat-panel-description *ngIf="skill.level">
+                    Level: {{ skill.level }}
+                    <button mat-icon-button color="warn" (click)="removeSkill($event, skill)">
+                      <mat-icon>clear</mat-icon>
+                    </button>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>{{ skill.description }}</p>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
-
-    <mat-divider></mat-divider>
-
-    <!--Town View-->
-    <mat-tab-group mat-stretch-tabs *ngIf="view === 'town'">
-      <mat-tab>
-        <ng-template mat-tab-label>Inventory</ng-template>
-        <div class="player-card-tab">
-          <mat-accordion class="headers-align">
-            <mat-expansion-panel *ngFor="let item of player.inventory | keyvalue: originalOrder">
-              <mat-expansion-panel-header>
-                <mat-panel-title>{{ item.key | titlecase }}</mat-panel-title>
-                <mat-panel-description>{{ item.value ? item.value.name : 'None' }}</mat-panel-description>
-              </mat-expansion-panel-header>    
-              <p>{{ item.value ? item.value.description : 'Nothing equipped' }}</p>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>Skills</ng-template>
-        <div class="player-card-tab">
-          <mat-accordion class="headers-align skills">
-            <mat-expansion-panel *ngFor="let skill of player.skills" hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>{{ skill.name }}</mat-panel-title>
-                <mat-panel-description *ngIf="skill.level">
-                  Level: {{ skill.level }}
-                  <button mat-icon-button color="warn" (click)="removeSkill($event, skill)">
-                    <mat-icon>clear</mat-icon>
-                  </button>
-                </mat-panel-description>
-              </mat-expansion-panel-header>    
-              <p>{{ skill.description }}</p>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
 
     <!--Battle View-->
     <mat-list *ngIf="view === 'arena'">
@@ -135,5 +137,6 @@
     <button mat-raised-button color="primary" [disabled]="player.skillPoints <= 0" (click)="levelup()">
       Level Up
     </button>
+    <button mat-raised-button color="primary" class="hidden-lg" (click)="showDetails = !showDetails">Toggle Details</button>
   </mat-card-actions>
 </mat-card>

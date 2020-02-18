@@ -6,6 +6,7 @@ import { Skill } from 'src/app/shared/interfaces/skill';
 import { MatDialog } from '@angular/material/dialog';
 import { LevelupModalComponent } from './levelup-modal/levelup-modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-player',
@@ -16,17 +17,29 @@ export class PlayerComponent implements OnInit {
   @Input() view = 'town';
   @Input() waiting = false;
   player: Player;
+  showDetails = true;
 
   @Output() skillUsed = new EventEmitter<Skill>();
 
   constructor(
     private playerService: PlayerService,
     public dialog: MatDialog,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit() {
     this.player = this.playerService.player;
+    this.showDetails = this.breakpointObserver.isMatched('(min-width: 1024px)');
+
+    // Always show player card details on large devices
+    this.breakpointObserver.observe([
+      '(min-width: 1024px)'
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.showDetails = true;
+      }
+    })
   }
 
   // Use a skill when in the arena

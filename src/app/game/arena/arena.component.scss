@@ -1,22 +1,39 @@
 .arena {
-  display: flex;
-  justify-content: center;
+  padding: 1rem;
 
-  .player-card {
-    width: 400px;
-    margin-right: 2rem;
+  .enemy-card {
+    margin-bottom: 1rem;
   }
 
-  .arena-content {
+  .controls {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .arena {
+    display: flex;
+    justify-content: center;
+  
+    .player-card {
+      max-width: 400px;
+      margin-right: 2rem;
+    }
 
     .enemy-card {
       width: 800px;
-      margin-bottom: 1rem;
     }
+  }
+}
 
-    .controls {
-      display: flex;
-      justify-content: space-between;
+@media screen and (max-width: 1023px) {
+
+  .arena {
+
+    .player-card {
+      margin-bottom: 1rem;
     }
   }
 }

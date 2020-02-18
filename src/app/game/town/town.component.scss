@@ -1,14 +1,29 @@
-.town {
-  display: flex;
-  justify-content: center;
+@media screen and (min-width: 1024px) {
 
-  .player-card {
-    width: 400px;
-    margin-right: 2rem;
-  }
-
-  .town-card {
-    width: 800px;
+  .town {
+    display: flex;
+    justify-content: center;
     padding: 1rem;
+  
+    .player-card {
+      max-width: 400px;
+      margin-right: 2rem;
+    }
+  
+    .town-card {
+      max-width: 800px;
+      padding: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+
+  .town {
+
+    .player-card,
+    .town-card {
+      padding: 1rem;
+    }
   }
 }

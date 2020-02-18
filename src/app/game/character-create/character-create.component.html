@@ -26,15 +26,16 @@
         </div>
       </div>
 
-      <mat-divider [vertical]="true"></mat-divider>
+      <mat-divider class="hidden-lg"></mat-divider>
+      <mat-divider class="hidden-sm" [vertical]="true"></mat-divider>
   
       <!-- Class -->
       <div class="character-create-section">
         <h2 class="mat-h2">Class</h2>
         <h3 class="mat-h3">Choose your class</h3>
         <div class="class-controls">
-          <mat-radio-group name="class" [(ngModel)]="selectedClass">
-            <mat-radio-button *ngFor="let class of classes" [value]="class">{{ class.name }}</mat-radio-button>
+          <mat-radio-group class="radio-group" name="class" [(ngModel)]="selectedClass">
+            <mat-radio-button class="radio-button" *ngFor="let class of classes" [value]="class">{{ class.name }}</mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="selected-class" *ngIf="selectedClass">
@@ -49,7 +50,8 @@
         </div>
       </div>
 
-      <mat-divider [vertical]="true"></mat-divider>
+      <mat-divider class="hidden-lg"></mat-divider>
+      <mat-divider class="hidden-sm" [vertical]="true"></mat-divider>
   
       <!-- Roll stats -->
       <div class="character-create-section">

@@ -3,55 +3,58 @@
     <app-player></app-player>
   </div>
 
-  <mat-tab-group>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Tavern
-      </ng-template>
-      <div class="town-card">
-        <app-tavern></app-tavern>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Healer
-      </ng-template>
-      <div class="town-card">
-        <app-healer></app-healer>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Item Store
-      </ng-template>
-      <div class="town-card">
-        <app-store></app-store>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Trainer
-      </ng-template>
-      <div class="town-card">
-        <app-trainer></app-trainer>
-      </div>
-    </mat-tab>
-    <mat-tab>
-      <ng-template mat-tab-label>
-        Arena
-      </ng-template>
-      <div class="town-card">
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>Arena</mat-card-title>
-            <mat-card-subtitle>Are you prepared for the next fight?</mat-card-subtitle>
-          </mat-card-header>
-          <img mat-card-image src="assets/img/backgrounds/arena.jpg" alt="Arena artwork">
-          <mat-card-content>
-            <button mat-raised-button color="primary" (click)="nextFight()">Enter the Arena!</button>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+  <div class="town-tabs">
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Tavern
+        </ng-template>
+        <div class="town-card">
+          <app-tavern></app-tavern>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Healer
+        </ng-template>
+        <div class="town-card">
+          <app-healer></app-healer>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Item Store
+        </ng-template>
+        <div class="town-card">
+          <app-store></app-store>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Trainer
+        </ng-template>
+        <div class="town-card">
+          <app-trainer></app-trainer>
+        </div>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          Arena
+        </ng-template>
+        <div class="town-card">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Arena</mat-card-title>
+              <mat-card-subtitle>Are you prepared for the next fight?</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="assets/img/backgrounds/arena.jpg" alt="Arena artwork">
+            <mat-card-content>
+              <button mat-raised-button color="primary" (click)="nextFight()">Enter the Arena!</button>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
 </div>

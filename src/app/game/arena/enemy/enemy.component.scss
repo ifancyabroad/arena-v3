@@ -31,14 +31,38 @@
   
   .enemy-image {
     flex-grow: 1;
-    height: 540px;
     overflow: hidden;
     text-align: center;
   
     img {
-      max-height: 100%;
       vertical-align: middle;
-      visibility: hidden;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+
+  .enemy-card-content {
+    
+    .enemy-image {
+      height: 540px;
+    
+      img {
+        max-height: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
+
+  .enemy-card-content {
+    
+    .enemy-image {
+    
+      img {
+        max-width: 100%;
+      }
     }
   }
 }

@@ -1,49 +1,90 @@
-.character-create-container {
-  display: flex;
-
-  .character-create-section {
-    width: calc(100% / 3);
-    padding: 2rem;
-  }
+.character-create {
+  padding: 1rem;
+  max-width: 1200px;
 }
 
-.selected-portrait {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 1rem;
+.character-create-container {
 
-  .portrait-image {
-    text-align: center;
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    overflow: hidden;
-
-    img {
-      max-width: 100%;
-      vertical-align: middle
+  .selected-portrait {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1rem;
+  
+    .portrait-image {
+      text-align: center;
+      border-radius: 50%;
+      overflow: hidden;
+  
+      img {
+        max-width: 100%;
+        vertical-align: middle
+      }
+    }
+  }
+  
+  .class-controls {
+    margin-bottom: 2rem;
+  }
+  
+  .radio-button {
+    margin: 5px;
+  }
+  
+  .stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stats-table {
+  
+    td:first-child {
+      text-transform: none;
     }
   }
 }
 
-.class-controls {
-  margin-bottom: 2rem;
+@media screen and (min-width: 1024px) {
+
+  .character-create-container {
+    display: flex;
+  
+    .character-create-section {
+      width: calc(100% / 3);
+      padding: 2rem;
+    }
+  
+    .selected-portrait {
+    
+      .portrait-image {
+        height: 250px;
+        width: 250px;
+      }
+    }
+  }
 }
 
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 2rem;
-}
 
-.stats-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+@media screen and (max-width: 1023px) {
 
-.stats-table {
+  .character-create-container {
 
-  td:first-child {
-    text-transform: none;
+    .character-create-section {
+      padding: 1rem 0;
+    }
+
+    .selected-portrait {
+    
+      .portrait-image {
+        height: 150px;
+        width: 150px;
+      }
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
