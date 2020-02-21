@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content>
+  <form class="login-form" id="login-form" (ngSubmit)="login()">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Username" name="username" [(ngModel)]="username" maxlength="12" required>
+      <mat-error>Please enter a valid username.</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password" maxlength="12" required>
+      <mat-error>Please enter a valid password.</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" type="submit" form="login-form" cdkFocusInitial>Login</button>
+</div>

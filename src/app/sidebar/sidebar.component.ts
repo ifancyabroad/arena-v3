@@ -3,6 +3,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { StateService, GameStatus } from '../shared/services/state.service';
+import { LoginModalComponent } from '../shared/components/login-modal/login-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,10 +19,20 @@ export class SidebarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private stateService: StateService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private stateService: StateService,
+    public dialog: MatDialog,
+  ) {}
 
   restart() {
     this.stateService.moveTo(GameStatus.Home);
+  }
+
+  openLogin() {
+    const dialogRef = this.dialog.open(LoginModalComponent, {
+      width: '400px'
+    });
   }
 
 }
