@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Config } from '../config';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient, private config: Config) { }
 
   signup(username: string, password: string) {
-    return this.http.put('http://localhost:3000/auth/signup', {
+    return this.http.put(environment.apiUrl + '/auth/signup', {
       username: username,
       password: password
     }, this.config.httpOptions)
@@ -23,7 +24,7 @@ export class LoginService {
   }
 
   login(username: string, password: string) {
-    return this.http.post('http://localhost:3000/auth/login', {
+    return this.http.post(environment.apiUrl + '/auth/login', {
       username: username,
       password: password
     }, this.config.httpOptions)
