@@ -1,5 +1,6 @@
 import { Class } from './interfaces/class';
 import { Injectable } from "@angular/core";
+import { HttpHeaders } from '@angular/common/http';
 
 export interface LevelTier {
   readonly level: number;
@@ -209,4 +210,11 @@ export class Config {
       type: 'defense'
     }
   ];
+
+  // Http
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+    })
+  };
 }

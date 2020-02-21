@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LoginService } from '../../services/login.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -11,7 +13,9 @@ export class LoginModalComponent implements OnInit {
   password: string;
 
   constructor(
-    public dialogRef: MatDialogRef<LoginModalComponent>
+    public dialogRef: MatDialogRef<LoginModalComponent>,
+    private loginService: LoginService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -23,8 +27,14 @@ export class LoginModalComponent implements OnInit {
 
   login() {
     console.log('logging in...');
-    console.log(this.username);
-    console.log(this.password);
+    this.loginService.login(this.username, this.password).subscribe(result => {
+      this.dialogRef.close();
+    }, error => {
+      this.modalService.errorDialog(
+        'Login faled', 
+        error
+      );
+    });
   }
 
 }
