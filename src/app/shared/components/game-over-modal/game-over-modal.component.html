@@ -4,7 +4,7 @@
   <p>You reached level <strong>{{ data.player.level }}</strong> with total experience of <strong>{{ data.player.experience }}</strong>. After defeating <strong>{{ data.player.kills }}</strong> enemies you were eventually slain by a <strong>{{ data.enemy.name }}</strong>.</p>
 
   <!--Rank-->
-  <table class="rank-table full-width">
+  <table class="rank-table full-width" *ngIf="!highScores">
     <thead>
       <tr>
         <th></th>
@@ -21,9 +21,33 @@
     </tbody>
   </table>
 
+  <!--High Scores-->
+  <table class="rank-table full-width" *ngIf="highScores">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Kills</th>
+        <th>Slain by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let score of highScores">
+        <td>{{ getRank(score.kills).rank }}</td>
+        <td>{{ getRank(score.kills).name }}</td>
+        <td>{{ score.name }}</td>
+        <td>Level {{ score.level }} {{ score.class }}</td>
+        <td>{{ score.kills }}</td>
+        <td>{{ score.slainBy }}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button color="accent" [disabled]="!user" (click)="submitScore()">Submit score</button>
-  <button mat-button color="primary" cdkFocusInitial (click)="restart()">Restart</button>
+  <button mat-raised-button color="accent" [disabled]="scoreSubmitted" *ngIf="user && !highScores" (click)="submitScore()">Submit score</button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="restart()">Restart</button>
 </div>

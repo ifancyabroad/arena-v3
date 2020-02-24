@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { GameOverModalComponent } from 'src/app/shared/components/game-over-modal/game-over-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { trigger, transition, useAnimation } from '@angular/animations';
-import { flyInAnimation, flyOutAnimation } from 'src/animations';
+import { flyInAnimation } from 'src/animations';
 
 @Component({
   selector: 'app-arena',
@@ -80,7 +80,6 @@ export class ArenaComponent implements OnInit, OnDestroy {
   gameOver() {
     const dialogRef = this.dialog.open(GameOverModalComponent, {
       disableClose: true,
-      width: '500px',
       data: {
         player: this.player,
         enemy: this.enemy

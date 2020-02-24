@@ -12,6 +12,8 @@ export class LoginModalComponent implements OnInit {
   username: string;
   password: string;
 
+  loggingIn = false;
+
   constructor(
     public dialogRef: MatDialogRef<LoginModalComponent>,
     private loginService: LoginService,
@@ -26,14 +28,16 @@ export class LoginModalComponent implements OnInit {
   }
 
   login() {
-    console.log('logging in...');
+    this.loggingIn = true;
     this.loginService.login(this.username, this.password).subscribe(result => {
       this.dialogRef.close();
     }, error => {
+      console.log(error);
       this.modalService.errorDialog(
-        'Login faled', 
+        'Login failed', 
         error
       );
+      this.loggingIn = false;
     });
   }
 

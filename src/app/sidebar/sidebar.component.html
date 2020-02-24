@@ -21,6 +21,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>The Arena</span>
+      <div class="flex-spacer"></div>
+      <span class="mat-small" *ngIf="user">Logged in as {{ user.username }}</span>
     </mat-toolbar>
     <app-game></app-game>
   </mat-sidenav-content>

@@ -2,10 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Config } from '../config';
-import { tap, catchError, take, switchMap } from 'rxjs/operators';
-import { throwError, of } from 'rxjs';
+import { tap, catchError, take, switchMap, map } from 'rxjs/operators';
+import { throwError, of, Observable } from 'rxjs';
 import { Player } from '../classes/player';
 import { LoginService } from './login.service';
+
+export interface Score {
+  name: string;
+  portrait: string;
+  class: string;
+  level: number;
+  kills: number;
+  slainBy: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +27,7 @@ export class ScoresService {
     private loginService: LoginService
   ) { }
 
-  getScores() {
+  getScores(): Observable<Score[]> {
     return this.loginService.user.pipe(
       take(1),
       switchMap(currentUser => {
@@ -26,10 +35,23 @@ export class ScoresService {
           return of(null);
         }
         const httpOptions = this.config.httpOptions;
-        httpOptions.headers.set('Authorization', 'Bearer ' + currentUser.token);
+        httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + currentUser.token);
         return this.http.get(environment.apiUrl + '/scores/scores', httpOptions)
       }),
-      tap(result => result),
+      map(result => {
+        if (result && result.scores) {
+          return result.scores.map(score => {
+            return {
+              name: score.name,
+              portrait: score.portrait,
+              class: score.class,
+              level: score.level,
+              kills: score.kills,
+              slainBy: score.slainBy
+            } as Score
+          });
+        }
+      }),
       catchError(err => this.handleError(err))
     )
   }
@@ -42,7 +64,7 @@ export class ScoresService {
           return of(null);
         }
         const httpOptions = this.config.httpOptions;
-        httpOptions.headers.set('Authorization', 'Bearer ' + currentUser.token);
+        httpOptions.headers = httpOptions.headers.set('Authorization', 'Bearer ' + currentUser.token);
         return this.http.post(environment.apiUrl + '/scores/score', {
           name: player.name,
           portrait: player.portrait,
@@ -69,7 +91,6 @@ export class ScoresService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(error.error.message);
   }
 }
