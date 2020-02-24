@@ -137,6 +137,9 @@
     <button mat-raised-button color="primary" [disabled]="player.skillPoints <= 0" (click)="levelup()">
       Level Up
     </button>
+    <button mat-raised-button color="accent" [disabled]="!battleOver" (click)="return()" *ngIf="view === 'arena'">
+      Return
+    </button>
     <button mat-raised-button color="primary" class="hidden-lg" (click)="showDetails = !showDetails">Toggle Details</button>
   </mat-card-actions>
 </mat-card>

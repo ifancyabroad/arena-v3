@@ -3,6 +3,7 @@
     <app-player
       [view]="'arena'"
       [waiting]="waiting"
+      [battleOver]="battleOver"
       (skillUsed)="roundStart($event)">
     </app-player>
   </div>
@@ -12,7 +13,7 @@
       <app-enemy [enemy]="enemy"></app-enemy>
     </div>
     <div class="log-card">
-      <app-combat-log [battleOver]="battleOver" [log]="log"></app-combat-log>
+      <app-combat-log [log]="log"></app-combat-log>
     </div>
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StateService, GameStatus } from 'src/app/shared/services/state.service';
 
 @Component({
   selector: 'app-combat-log',
@@ -7,16 +6,11 @@ import { StateService, GameStatus } from 'src/app/shared/services/state.service'
   styleUrls: ['./combat-log.component.scss']
 })
 export class CombatLogComponent implements OnInit {
-  @Input() battleOver = false;
   @Input() log: string[] = [];
 
-  constructor(private stateService: StateService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  return() {
-    this.stateService.moveTo(GameStatus.Town);
   }
 
 }

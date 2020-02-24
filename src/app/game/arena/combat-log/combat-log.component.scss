@@ -1,24 +1,11 @@
-.log-container {
+.combat-log {
+  height: 100px;
+  margin-bottom: 0;
+  overflow: auto;
   display: flex;
+  flex-direction: column-reverse;
 
-  .controls {
-    margin-right: 2rem;
+  p {
+    margin: 0;
   }
-
-  .log {
-    flex-grow: 1;
-
-    .combat-log {
-      height: 100px;
-      margin-bottom: 0;
-      overflow: auto;
-      display: flex;
-      flex-direction: column-reverse;
-  
-      p {
-        margin: 0;
-      }
-    }
-  }
-
 }

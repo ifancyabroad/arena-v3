@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LevelupModalComponent } from './levelup-modal/levelup-modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { StateService, GameStatus } from 'src/app/shared/services/state.service';
 
 @Component({
   selector: 'app-player',
@@ -16,6 +17,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 export class PlayerComponent implements OnInit {
   @Input() view = 'town';
   @Input() waiting = false;
+  @Input() battleOver = false;
   player: Player;
   showDetails = true;
 
@@ -25,7 +27,8 @@ export class PlayerComponent implements OnInit {
     private playerService: PlayerService,
     public dialog: MatDialog,
     private modalService: ModalService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private stateService: StateService
   ) { }
 
   ngOnInit() {
@@ -66,6 +69,11 @@ export class PlayerComponent implements OnInit {
       width: '300px',
       data: { player: this.player }
     });
+  }
+
+  // Return to town after a battle
+  return() {
+    this.stateService.moveTo(GameStatus.Town);
   }
 
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
