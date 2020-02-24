@@ -24,6 +24,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button disabled>Submit score</button>
-  <button mat-button cdkFocusInitial (click)="restart()">Restart</button>
+  <button mat-button color="accent" [disabled]="!user" (click)="submitScore()">Submit score</button>
+  <button mat-button color="primary" cdkFocusInitial (click)="restart()">Restart</button>
 </div>
