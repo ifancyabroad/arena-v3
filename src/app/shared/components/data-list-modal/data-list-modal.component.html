@@ -1,12 +1,21 @@
 <h1 mat-dialog-title>{{ data.type | titlecase }}</h1>
 <div mat-dialog-content>
-  <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let dataItem of dataArray">
-      {{ dataItem.name }}
-    </mat-list-option>
-  </mat-selection-list>
+  <mat-list>
+    <ng-container *ngFor="let dataItem of dataArray">
+      <mat-list-item>
+        <h4 mat-line>{{ dataItem.name }}</h4>
+        <button mat-icon-button aria-label="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button>New</button>
+  <button mat-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button color="primary">New</button>
 </div>

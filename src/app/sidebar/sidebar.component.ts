@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   openEdit(type: string) {
     const dialogRef = this.dialog.open(DataListModalComponent, {
-      width: '300px',
+      width: '500px',
       data: {
         type: type
       }
