@@ -7,7 +7,12 @@
     <mat-nav-list>
       <a mat-list-item (click)="restart()">Restart</a>
       <a mat-list-item (click)="openLogin()" *ngIf="!user">Login</a>
-      <a mat-list-item (click)="logout()" *ngIf="user">Logout</a>
+      <ng-container *ngIf="user">
+        <a mat-list-item (click)="logout()">Logout</a>
+        <a mat-list-item (click)="openEdit('enemies')">Enemies</a>
+        <a mat-list-item (click)="openEdit('skills')">Skills</a>
+        <a mat-list-item (click)="openEdit('items')">Items</a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

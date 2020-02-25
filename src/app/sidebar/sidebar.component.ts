@@ -6,6 +6,7 @@ import { StateService, GameStatus } from '../shared/services/state.service';
 import { LoginModalComponent } from '../shared/components/login-modal/login-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginService, User } from '../shared/services/login.service';
+import { DataListModalComponent } from '../shared/components/data-list-modal/data-list-modal.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -38,13 +39,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   openLogin() {
-    const dialogRef = this.dialog.open(LoginModalComponent, {
-      width: '400px'
-    });
+    const dialogRef = this.dialog.open(LoginModalComponent);
   }
 
   logout() {
     this.loginService.logout();
+  }
+
+  openEdit(type: string) {
+    const dialogRef = this.dialog.open(DataListModalComponent, {
+      width: '300px',
+      data: {
+        type: type
+      }
+    })
   }
 
   ngOnDestroy() {
